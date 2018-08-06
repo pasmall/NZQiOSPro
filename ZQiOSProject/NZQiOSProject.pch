@@ -1,0 +1,37 @@
+//
+//  NZQiOSProject.pch
+//  ZQiOSProject
+//
+//  Created by Lyric on 2018/8/2.
+//  Copyright © 2018年 Lyric. All rights reserved.
+//
+
+#ifndef NZQiOSProject_pch
+#define NZQiOSProject_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+//导入的库
+#import <YYKit.h>
+#import "UIView+GestureCallback.h"
+
+
+//弱引用
+#define NZQWeak(type)  __weak typeof(type) weak##type = type
+//属性转字符串
+#define NZQKeyPath(obj, key) @(((void)obj.key, #key))
+//空对象
+#define NZQIsEmpty(_object) (_object == nil \
+|| [_object isKindOfClass:[NSNull class]] \
+|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
+|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
+
+//不同屏幕尺寸字体适配
+#define kScreenWidthRatio  (UIScreen.mainScreen.bounds.size.width / 375.0)
+#define kScreenHeightRatio (UIScreen.mainScreen.bounds.size.height / 667.0)
+#define AdaptedWidth(x)  ceilf((x) * kScreenWidthRatio)
+#define AdaptedHeight(x) ceilf((x) * kScreenHeightRatio)
+#define AdaptedFontSize(R)     [UIFont systemFontOfSize:AdaptedWidth(R)]
+
+#endif /* NZQiOSProject_pch */
