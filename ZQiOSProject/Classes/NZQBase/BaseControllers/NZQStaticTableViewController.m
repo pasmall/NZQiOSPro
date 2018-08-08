@@ -22,9 +22,11 @@ const UIEdgeInsets tableViewDefaultLayoutMargins = {8, 8, 8, 8};
 {
     [super viewDidLoad];
     
+    
+//    self.tableView.separatorInset = UIEdgeInsetsZero;
+//    self.tableView.layoutMargins = UIEdgeInsetsZero;
+    
     NSLog(@"self.tableView.separatorInset = %@, self.tableView.separatorInset = %@", NSStringFromUIEdgeInsets(self.tableView.separatorInset), NSStringFromUIEdgeInsets(self.tableView.layoutMargins));
-    //    self.tableView.separatorInset = UIEdgeInsetsZero;
-    //    self.tableView.layoutMargins = UIEdgeInsetsZero;
 }
 
 

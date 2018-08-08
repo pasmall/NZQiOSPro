@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		608A6F277593E4EEA35AEF54 /* libPods-ZQiOSProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF22ACBA3FC9B5021074B3C /* libPods-ZQiOSProject.a */; };
+		6851EB76211A838B00DEF4CA /* NZQWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6851EB75211A838B00DEF4CA /* NZQWorkModel.m */; };
+		6851EB7A211A8D0600DEF4CA /* NZQWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6851EB78211A8D0600DEF4CA /* NZQWorkCell.m */; };
+		6851EB7B211A8D0600DEF4CA /* NZQWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6851EB79211A8D0600DEF4CA /* NZQWorkCell.xib */; };
+		6851EB7F211AEC9000DEF4CA /* NZQProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6851EB7D211AEC9000DEF4CA /* NZQProjectCell.m */; };
+		6851EB80211AEC9000DEF4CA /* NZQProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6851EB7E211AEC9000DEF4CA /* NZQProjectCell.xib */; };
 		686E38E721129C1000DE73E9 /* NZQAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 686E38E621129C1000DE73E9 /* NZQAppDelegate.m */; };
 		686E38EF21129C1200DE73E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 686E38EE21129C1200DE73E9 /* Assets.xcassets */; };
 		686E38F521129C1200DE73E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 686E38F421129C1200DE73E9 /* main.m */; };
@@ -30,6 +35,17 @@
 		686E394B2113012B00DE73E9 /* MBProgressHUD+NZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 686E394A2113012B00DE73E9 /* MBProgressHUD+NZQ.m */; };
 		686E394E2113054F00DE73E9 /* NZQTextViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 686E394D2113054F00DE73E9 /* NZQTextViewControllerDelegate.m */; };
 		686E3951211307E600DE73E9 /* NZQRequestBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 686E3950211307E600DE73E9 /* NZQRequestBaseViewController.m */; };
+		689BA34821193D8B0022336F /* NZQRefreshTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA34721193D8B0022336F /* NZQRefreshTableViewController.m */; };
+		689BA34B21193F930022336F /* NZQEasyBlankPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA34A21193F930022336F /* NZQEasyBlankPageView.m */; };
+		689BA34E211943760022336F /* UIButton+NZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA34D211943760022336F /* UIButton+NZQ.m */; };
+		689BA3532119499B0022336F /* NZQCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA3512119499B0022336F /* NZQCommentCell.m */; };
+		689BA3542119499B0022336F /* NZQCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689BA3522119499B0022336F /* NZQCommentCell.xib */; };
+		689BA357211972200022336F /* UIColor+NZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA356211972200022336F /* UIColor+NZQ.m */; };
+		689BA35B211972E90022336F /* NZQFansCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA359211972E90022336F /* NZQFansCell.m */; };
+		689BA35C211972E90022336F /* NZQFansCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689BA35A211972E90022336F /* NZQFansCell.xib */; };
+		689BA35F211977E70022336F /* UIView+NZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA35E211977E70022336F /* UIView+NZQ.m */; };
+		689BA36221198DE60022336F /* UINavigationController+StatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA36121198DE60022336F /* UINavigationController+StatusBarStyle.m */; };
+		689BA365211998ED0022336F /* NZQCustonBuildHomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA364211998ED0022336F /* NZQCustonBuildHomePage.m */; };
 		68B8A12F2113E38F004DE94C /* NZQBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A12E2113E38F004DE94C /* NZQBaseViewController.m */; };
 		68B8A1322113E5E4004DE94C /* NZQTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A1312113E5E4004DE94C /* NZQTableViewController.m */; };
 		68B8A13821140AB9004DE94C /* NZQWordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A13721140AB9004DE94C /* NZQWordItem.m */; };
@@ -41,6 +57,18 @@
 		68B8A14B21143B76004DE94C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A14A21143B76004DE94C /* MainViewController.m */; };
 		68B8A14E21143BB3004DE94C /* BasicKnowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A14D21143BB3004DE94C /* BasicKnowViewController.m */; };
 		68B8A15121143BBF004DE94C /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A15021143BBF004DE94C /* DemoViewController.m */; };
+		68CDADA821182C070009527F /* NZQPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADA721182C070009527F /* NZQPersonalViewController.m */; };
+		68CDADAB211838870009527F /* NZQMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADAA211838870009527F /* NZQMessageViewController.m */; };
+		68CDADBF211840A80009527F /* UIView+ZJFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADAF211840A80009527F /* UIView+ZJFrame.m */; };
+		68CDADC0211840A80009527F /* UIViewController+ZJScrollPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADB1211840A80009527F /* UIViewController+ZJScrollPageController.m */; };
+		68CDADC1211840A80009527F /* ZJCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADB3211840A80009527F /* ZJCollectionView.m */; };
+		68CDADC2211840A80009527F /* ZJContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADB5211840A80009527F /* ZJContentView.m */; };
+		68CDADC3211840A80009527F /* ZJScrollPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADB7211840A80009527F /* ZJScrollPageView.m */; };
+		68CDADC4211840A80009527F /* ZJScrollSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADBA211840A80009527F /* ZJScrollSegmentView.m */; };
+		68CDADC5211840A80009527F /* ZJSegmentStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADBC211840A80009527F /* ZJSegmentStyle.m */; };
+		68CDADC6211840A80009527F /* ZJTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADBE211840A80009527F /* ZJTitleView.m */; };
+		68CDADC92118438C0009527F /* NZQSubMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADC82118438C0009527F /* NZQSubMessageViewController.m */; };
+		68CDADCC211853060009527F /* NZQFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADCB211853060009527F /* NZQFansViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +90,14 @@
 
 /* Begin PBXFileReference section */
 		580994D69E66FAD6FA1B16F1 /* Pods-ZQiOSProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZQiOSProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZQiOSProject/Pods-ZQiOSProject.debug.xcconfig"; sourceTree = "<group>"; };
+		6851EB74211A838B00DEF4CA /* NZQWorkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQWorkModel.h; sourceTree = "<group>"; };
+		6851EB75211A838B00DEF4CA /* NZQWorkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQWorkModel.m; sourceTree = "<group>"; };
+		6851EB77211A8D0600DEF4CA /* NZQWorkCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQWorkCell.h; sourceTree = "<group>"; };
+		6851EB78211A8D0600DEF4CA /* NZQWorkCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQWorkCell.m; sourceTree = "<group>"; };
+		6851EB79211A8D0600DEF4CA /* NZQWorkCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQWorkCell.xib; sourceTree = "<group>"; };
+		6851EB7C211AEC9000DEF4CA /* NZQProjectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQProjectCell.h; sourceTree = "<group>"; };
+		6851EB7D211AEC9000DEF4CA /* NZQProjectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQProjectCell.m; sourceTree = "<group>"; };
+		6851EB7E211AEC9000DEF4CA /* NZQProjectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQProjectCell.xib; sourceTree = "<group>"; };
 		686E38E221129C1000DE73E9 /* ZQiOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZQiOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		686E38E521129C1000DE73E9 /* NZQAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQAppDelegate.h; sourceTree = "<group>"; };
 		686E38E621129C1000DE73E9 /* NZQAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQAppDelegate.m; sourceTree = "<group>"; };
@@ -108,6 +144,27 @@
 		686E394D2113054F00DE73E9 /* NZQTextViewControllerDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQTextViewControllerDelegate.m; sourceTree = "<group>"; };
 		686E394F211307E600DE73E9 /* NZQRequestBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQRequestBaseViewController.h; sourceTree = "<group>"; };
 		686E3950211307E600DE73E9 /* NZQRequestBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQRequestBaseViewController.m; sourceTree = "<group>"; };
+		689BA345211933B70022336F /* NZQUrlMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NZQUrlMacro.h; sourceTree = "<group>"; };
+		689BA34621193D8B0022336F /* NZQRefreshTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQRefreshTableViewController.h; sourceTree = "<group>"; };
+		689BA34721193D8B0022336F /* NZQRefreshTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQRefreshTableViewController.m; sourceTree = "<group>"; };
+		689BA34921193F930022336F /* NZQEasyBlankPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQEasyBlankPageView.h; sourceTree = "<group>"; };
+		689BA34A21193F930022336F /* NZQEasyBlankPageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQEasyBlankPageView.m; sourceTree = "<group>"; };
+		689BA34C211943760022336F /* UIButton+NZQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+NZQ.h"; sourceTree = "<group>"; };
+		689BA34D211943760022336F /* UIButton+NZQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+NZQ.m"; sourceTree = "<group>"; };
+		689BA3502119499B0022336F /* NZQCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQCommentCell.h; sourceTree = "<group>"; };
+		689BA3512119499B0022336F /* NZQCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQCommentCell.m; sourceTree = "<group>"; };
+		689BA3522119499B0022336F /* NZQCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQCommentCell.xib; sourceTree = "<group>"; };
+		689BA355211972200022336F /* UIColor+NZQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+NZQ.h"; sourceTree = "<group>"; };
+		689BA356211972200022336F /* UIColor+NZQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+NZQ.m"; sourceTree = "<group>"; };
+		689BA358211972E90022336F /* NZQFansCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQFansCell.h; sourceTree = "<group>"; };
+		689BA359211972E90022336F /* NZQFansCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQFansCell.m; sourceTree = "<group>"; };
+		689BA35A211972E90022336F /* NZQFansCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQFansCell.xib; sourceTree = "<group>"; };
+		689BA35D211977E70022336F /* UIView+NZQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+NZQ.h"; sourceTree = "<group>"; };
+		689BA35E211977E70022336F /* UIView+NZQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+NZQ.m"; sourceTree = "<group>"; };
+		689BA36021198DE60022336F /* UINavigationController+StatusBarStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+StatusBarStyle.h"; sourceTree = "<group>"; };
+		689BA36121198DE60022336F /* UINavigationController+StatusBarStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+StatusBarStyle.m"; sourceTree = "<group>"; };
+		689BA363211998ED0022336F /* NZQCustonBuildHomePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQCustonBuildHomePage.h; sourceTree = "<group>"; };
+		689BA364211998ED0022336F /* NZQCustonBuildHomePage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQCustonBuildHomePage.m; sourceTree = "<group>"; };
 		68B8A12D2113E38F004DE94C /* NZQBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQBaseViewController.h; sourceTree = "<group>"; };
 		68B8A12E2113E38F004DE94C /* NZQBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQBaseViewController.m; sourceTree = "<group>"; };
 		68B8A1302113E5E4004DE94C /* NZQTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQTableViewController.h; sourceTree = "<group>"; };
@@ -130,6 +187,31 @@
 		68B8A14D21143BB3004DE94C /* BasicKnowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicKnowViewController.m; sourceTree = "<group>"; };
 		68B8A14F21143BBF004DE94C /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		68B8A15021143BBF004DE94C /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		68CDADA621182C070009527F /* NZQPersonalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQPersonalViewController.h; sourceTree = "<group>"; };
+		68CDADA721182C070009527F /* NZQPersonalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQPersonalViewController.m; sourceTree = "<group>"; };
+		68CDADA9211838870009527F /* NZQMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQMessageViewController.h; sourceTree = "<group>"; };
+		68CDADAA211838870009527F /* NZQMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQMessageViewController.m; sourceTree = "<group>"; };
+		68CDADAE211840A80009527F /* UIView+ZJFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZJFrame.h"; sourceTree = "<group>"; };
+		68CDADAF211840A80009527F /* UIView+ZJFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZJFrame.m"; sourceTree = "<group>"; };
+		68CDADB0211840A80009527F /* UIViewController+ZJScrollPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ZJScrollPageController.h"; sourceTree = "<group>"; };
+		68CDADB1211840A80009527F /* UIViewController+ZJScrollPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ZJScrollPageController.m"; sourceTree = "<group>"; };
+		68CDADB2211840A80009527F /* ZJCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJCollectionView.h; sourceTree = "<group>"; };
+		68CDADB3211840A80009527F /* ZJCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJCollectionView.m; sourceTree = "<group>"; };
+		68CDADB4211840A80009527F /* ZJContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJContentView.h; sourceTree = "<group>"; };
+		68CDADB5211840A80009527F /* ZJContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJContentView.m; sourceTree = "<group>"; };
+		68CDADB6211840A80009527F /* ZJScrollPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollPageView.h; sourceTree = "<group>"; };
+		68CDADB7211840A80009527F /* ZJScrollPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJScrollPageView.m; sourceTree = "<group>"; };
+		68CDADB8211840A80009527F /* ZJScrollPageViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollPageViewDelegate.h; sourceTree = "<group>"; };
+		68CDADB9211840A80009527F /* ZJScrollSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJScrollSegmentView.h; sourceTree = "<group>"; };
+		68CDADBA211840A80009527F /* ZJScrollSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJScrollSegmentView.m; sourceTree = "<group>"; };
+		68CDADBB211840A80009527F /* ZJSegmentStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJSegmentStyle.h; sourceTree = "<group>"; };
+		68CDADBC211840A80009527F /* ZJSegmentStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJSegmentStyle.m; sourceTree = "<group>"; };
+		68CDADBD211840A80009527F /* ZJTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJTitleView.h; sourceTree = "<group>"; };
+		68CDADBE211840A80009527F /* ZJTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJTitleView.m; sourceTree = "<group>"; };
+		68CDADC72118438C0009527F /* NZQSubMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQSubMessageViewController.h; sourceTree = "<group>"; };
+		68CDADC82118438C0009527F /* NZQSubMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQSubMessageViewController.m; sourceTree = "<group>"; };
+		68CDADCA211853060009527F /* NZQFansViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQFansViewController.h; sourceTree = "<group>"; };
+		68CDADCB211853060009527F /* NZQFansViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQFansViewController.m; sourceTree = "<group>"; };
 		73DB18B339588898E2612FD1 /* Pods-ZQiOSProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZQiOSProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZQiOSProject/Pods-ZQiOSProject.release.xcconfig"; sourceTree = "<group>"; };
 		9BF22ACBA3FC9B5021074B3C /* libPods-ZQiOSProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZQiOSProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -166,6 +248,15 @@
 				9BF22ACBA3FC9B5021074B3C /* libPods-ZQiOSProject.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6851EB73211A837300DEF4CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6851EB74211A838B00DEF4CA /* NZQWorkModel.h */,
+				6851EB75211A838B00DEF4CA /* NZQWorkModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		686E38D921129C1000DE73E9 = {
@@ -239,6 +330,7 @@
 		686E391C2112AD5900DE73E9 /* NetWork */ = {
 			isa = PBXGroup;
 			children = (
+				689BA345211933B70022336F /* NZQUrlMacro.h */,
 				686E391D2112D70700DE73E9 /* NZQBaseRequest.h */,
 				686E391E2112D70700DE73E9 /* NZQBaseRequest.m */,
 				686E39202112D71F00DE73E9 /* NZQBaseResponse.h */,
@@ -255,6 +347,14 @@
 				686E39272112DEBE00DE73E9 /* ThirdCategory */,
 				686E39492113012B00DE73E9 /* MBProgressHUD+NZQ.h */,
 				686E394A2113012B00DE73E9 /* MBProgressHUD+NZQ.m */,
+				689BA34C211943760022336F /* UIButton+NZQ.h */,
+				689BA34D211943760022336F /* UIButton+NZQ.m */,
+				689BA355211972200022336F /* UIColor+NZQ.h */,
+				689BA356211972200022336F /* UIColor+NZQ.m */,
+				689BA35D211977E70022336F /* UIView+NZQ.h */,
+				689BA35E211977E70022336F /* UIView+NZQ.m */,
+				689BA36021198DE60022336F /* UINavigationController+StatusBarStyle.h */,
+				689BA36121198DE60022336F /* UINavigationController+StatusBarStyle.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -276,8 +376,11 @@
 		686E39362112EFAE00DE73E9 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				68CDADAC2118409A0009527F /* ThirdTools */,
 				686E39342112E95900DE73E9 /* YYFPSLabel.h */,
 				686E39332112E95900DE73E9 /* YYFPSLabel.m */,
+				689BA34921193F930022336F /* NZQEasyBlankPageView.h */,
+				689BA34A21193F930022336F /* NZQEasyBlankPageView.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -309,6 +412,8 @@
 				68B8A1312113E5E4004DE94C /* NZQTableViewController.m */,
 				68B8A13C21142BF4004DE94C /* NZQStaticTableViewController.h */,
 				68B8A13D21142BF4004DE94C /* NZQStaticTableViewController.m */,
+				689BA34621193D8B0022336F /* NZQRefreshTableViewController.h */,
+				689BA34721193D8B0022336F /* NZQRefreshTableViewController.m */,
 			);
 			path = BaseControllers;
 			sourceTree = "<group>";
@@ -328,6 +433,25 @@
 			path = BaseView;
 			sourceTree = "<group>";
 		};
+		689BA34F2119493D0022336F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				689BA3502119499B0022336F /* NZQCommentCell.h */,
+				689BA3512119499B0022336F /* NZQCommentCell.m */,
+				689BA3522119499B0022336F /* NZQCommentCell.xib */,
+				689BA358211972E90022336F /* NZQFansCell.h */,
+				689BA359211972E90022336F /* NZQFansCell.m */,
+				689BA35A211972E90022336F /* NZQFansCell.xib */,
+				6851EB77211A8D0600DEF4CA /* NZQWorkCell.h */,
+				6851EB78211A8D0600DEF4CA /* NZQWorkCell.m */,
+				6851EB79211A8D0600DEF4CA /* NZQWorkCell.xib */,
+				6851EB7C211AEC9000DEF4CA /* NZQProjectCell.h */,
+				6851EB7D211AEC9000DEF4CA /* NZQProjectCell.m */,
+				6851EB7E211AEC9000DEF4CA /* NZQProjectCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		68B8A1342114083C004DE94C /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				68B8A145211434B4004DE94C /* Main */,
+				68CDADA52118292E0009527F /* Demo */,
 			);
 			path = "示例项目(用作参考，新项目可删除)";
 			sourceTree = "<group>";
@@ -362,6 +487,57 @@
 				68B8A15021143BBF004DE94C /* DemoViewController.m */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		68CDADA52118292E0009527F /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				6851EB73211A837300DEF4CA /* Model */,
+				689BA34F2119493D0022336F /* View */,
+				68CDADA621182C070009527F /* NZQPersonalViewController.h */,
+				68CDADA721182C070009527F /* NZQPersonalViewController.m */,
+				68CDADA9211838870009527F /* NZQMessageViewController.h */,
+				68CDADAA211838870009527F /* NZQMessageViewController.m */,
+				68CDADC72118438C0009527F /* NZQSubMessageViewController.h */,
+				68CDADC82118438C0009527F /* NZQSubMessageViewController.m */,
+				68CDADCA211853060009527F /* NZQFansViewController.h */,
+				68CDADCB211853060009527F /* NZQFansViewController.m */,
+				689BA363211998ED0022336F /* NZQCustonBuildHomePage.h */,
+				689BA364211998ED0022336F /* NZQCustonBuildHomePage.m */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		68CDADAC2118409A0009527F /* ThirdTools */ = {
+			isa = PBXGroup;
+			children = (
+				68CDADAD211840A80009527F /* ZJScrollPageView */,
+			);
+			path = ThirdTools;
+			sourceTree = "<group>";
+		};
+		68CDADAD211840A80009527F /* ZJScrollPageView */ = {
+			isa = PBXGroup;
+			children = (
+				68CDADAE211840A80009527F /* UIView+ZJFrame.h */,
+				68CDADAF211840A80009527F /* UIView+ZJFrame.m */,
+				68CDADB0211840A80009527F /* UIViewController+ZJScrollPageController.h */,
+				68CDADB1211840A80009527F /* UIViewController+ZJScrollPageController.m */,
+				68CDADB2211840A80009527F /* ZJCollectionView.h */,
+				68CDADB3211840A80009527F /* ZJCollectionView.m */,
+				68CDADB4211840A80009527F /* ZJContentView.h */,
+				68CDADB5211840A80009527F /* ZJContentView.m */,
+				68CDADB6211840A80009527F /* ZJScrollPageView.h */,
+				68CDADB7211840A80009527F /* ZJScrollPageView.m */,
+				68CDADB8211840A80009527F /* ZJScrollPageViewDelegate.h */,
+				68CDADB9211840A80009527F /* ZJScrollSegmentView.h */,
+				68CDADBA211840A80009527F /* ZJScrollSegmentView.m */,
+				68CDADBB211840A80009527F /* ZJSegmentStyle.h */,
+				68CDADBC211840A80009527F /* ZJSegmentStyle.m */,
+				68CDADBD211840A80009527F /* ZJTitleView.h */,
+				68CDADBE211840A80009527F /* ZJTitleView.m */,
+			);
+			path = ZJScrollPageView;
 			sourceTree = "<group>";
 		};
 		825500F523B6865B60A01B9C /* Pods */ = {
@@ -478,7 +654,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6851EB7B211A8D0600DEF4CA /* NZQWorkCell.xib in Resources */,
 				686E38EF21129C1200DE73E9 /* Assets.xcassets in Resources */,
+				689BA35C211972E90022336F /* NZQFansCell.xib in Resources */,
+				6851EB80211AEC9000DEF4CA /* NZQProjectCell.xib in Resources */,
+				689BA3542119499B0022336F /* NZQCommentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,11 +688,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZQiOSProject/Pods-ZQiOSProject-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/ZFPlayer/ZFPlayer/ZFPlayer.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZFPlayer.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -545,11 +727,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				68B8A13B21142AE5004DE94C /* NZQItemSection.m in Sources */,
+				68CDADC6211840A80009527F /* ZJTitleView.m in Sources */,
 				68B8A13E21142BF4004DE94C /* NZQStaticTableViewController.m in Sources */,
+				689BA357211972200022336F /* UIColor+NZQ.m in Sources */,
 				686E394E2113054F00DE73E9 /* NZQTextViewControllerDelegate.m in Sources */,
 				68B8A15121143BBF004DE94C /* DemoViewController.m in Sources */,
 				686E3951211307E600DE73E9 /* NZQRequestBaseViewController.m in Sources */,
 				686E392F2112E34A00DE73E9 /* NSDecimalNumber+Addtion.m in Sources */,
+				68CDADC0211840A80009527F /* UIViewController+ZJScrollPageController.m in Sources */,
+				689BA36221198DE60022336F /* UINavigationController+StatusBarStyle.m in Sources */,
+				689BA35B211972E90022336F /* NZQFansCell.m in Sources */,
 				686E39422112F81400DE73E9 /* NZQAutoRefreshFooter.m in Sources */,
 				68B8A14421142D2E004DE94C /* NZQSettingCell.m in Sources */,
 				68B8A14121142C4E004DE94C /* NZQWordArrowItem.m in Sources */,
@@ -557,21 +744,40 @@
 				686E39322112E3DF00DE73E9 /* UITextView+Addtion.m in Sources */,
 				686E391F2112D70700DE73E9 /* NZQBaseRequest.m in Sources */,
 				68B8A14B21143B76004DE94C /* MainViewController.m in Sources */,
+				689BA34E211943760022336F /* UIButton+NZQ.m in Sources */,
 				686E39452112F95500DE73E9 /* NZQNavigationController.m in Sources */,
+				6851EB76211A838B00DEF4CA /* NZQWorkModel.m in Sources */,
+				68CDADC1211840A80009527F /* ZJCollectionView.m in Sources */,
+				6851EB7A211A8D0600DEF4CA /* NZQWorkCell.m in Sources */,
 				686E39352112E95900DE73E9 /* YYFPSLabel.m in Sources */,
+				689BA35F211977E70022336F /* UIView+NZQ.m in Sources */,
 				686E39192112A05400DE73E9 /* NZQConst.m in Sources */,
 				68B8A1322113E5E4004DE94C /* NZQTableViewController.m in Sources */,
+				689BA3532119499B0022336F /* NZQCommentCell.m in Sources */,
+				689BA34821193D8B0022336F /* NZQRefreshTableViewController.m in Sources */,
+				6851EB7F211AEC9000DEF4CA /* NZQProjectCell.m in Sources */,
 				686E38F521129C1200DE73E9 /* main.m in Sources */,
+				68CDADC5211840A80009527F /* ZJSegmentStyle.m in Sources */,
+				68CDADAB211838870009527F /* NZQMessageViewController.m in Sources */,
+				689BA365211998ED0022336F /* NZQCustonBuildHomePage.m in Sources */,
+				689BA34B21193F930022336F /* NZQEasyBlankPageView.m in Sources */,
 				686E392C2112E1C000DE73E9 /* UIView+GestureCallback.m in Sources */,
 				686E393C2112F2BC00DE73E9 /* NZQNavigationBar.m in Sources */,
+				68CDADC92118438C0009527F /* NZQSubMessageViewController.m in Sources */,
 				686E39252112D7DC00DE73E9 /* NZQRequestManager.m in Sources */,
+				68CDADC2211840A80009527F /* ZJContentView.m in Sources */,
+				68CDADCC211853060009527F /* NZQFansViewController.m in Sources */,
 				68B8A12F2113E38F004DE94C /* NZQBaseViewController.m in Sources */,
 				68B8A148211434FD004DE94C /* NZQTabBarController.m in Sources */,
+				68CDADA821182C070009527F /* NZQPersonalViewController.m in Sources */,
 				686E393F2112F7D000DE73E9 /* NZQNormalRefreshHeader.m in Sources */,
 				686E39222112D71F00DE73E9 /* NZQBaseResponse.m in Sources */,
 				686E39482112FB9300DE73E9 /* NZQNavUIBaseViewController.m in Sources */,
 				686E39292112E05A00DE73E9 /* NullSafe.m in Sources */,
+				68CDADBF211840A80009527F /* UIView+ZJFrame.m in Sources */,
+				68CDADC3211840A80009527F /* ZJScrollPageView.m in Sources */,
 				686E394B2113012B00DE73E9 /* MBProgressHUD+NZQ.m in Sources */,
+				68CDADC4211840A80009527F /* ZJScrollSegmentView.m in Sources */,
 				68B8A14E21143BB3004DE94C /* BasicKnowViewController.m in Sources */,
 				686E38E721129C1000DE73E9 /* NZQAppDelegate.m in Sources */,
 			);

@@ -24,7 +24,6 @@
     UIEdgeInsets edgeInsets = self.tableView.contentInset;
     edgeInsets.bottom += self.tabBarController.tabBar.height;
     self.tableView.contentInset = edgeInsets;
-    
     [self loadData];
     
 }

@@ -9,6 +9,7 @@
 #import "AFHTTPSessionManager.h"
 #import "NZQBaseResponse.h"
 #import <AFNetworking.h>
+#import "NZQUrlMacro.h"
 
 typedef NSString NZQDataName;
 

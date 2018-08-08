@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <UINavigationController+FDFullscreenPopGesture.h>
+#import "UINavigationController+StatusBarStyle.h"
 
 @interface NZQNavigationController : UINavigationController
 

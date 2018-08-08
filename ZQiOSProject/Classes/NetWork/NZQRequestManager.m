@@ -187,7 +187,6 @@ static NSString *jsonFileDirectory = @"NZQLocalJsons"; //项目文件夹路径
     NSMutableSet *acceptableContentTypes = [NSMutableSet setWithSet:self.responseSerializer.acceptableContentTypes];
     [acceptableContentTypes addObjectsFromArray:@[@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", @"application/xml", @"text/xml", @"*/*", @"application/x-plist"]];
     self.responseSerializer.acceptableContentTypes = [acceptableContentTypes copy];
-    
     //记录网络状态
     [self.reachabilityManager startMonitoring];
     //自定义处理数据

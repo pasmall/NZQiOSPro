@@ -9,5 +9,7 @@ pod 'MBProgressHUD',:inhibit_warnings => true
 pod 'Masonry',:inhibit_warnings => true
 pod 'FDFullscreenPopGesture',:inhibit_warnings => true
 pod 'IQKeyboardManager',:inhibit_warnings => true
+pod 'Masonry',:inhibit_warnings => true
+pod 'ZFPlayer',:inhibit_warnings => true
 
 end

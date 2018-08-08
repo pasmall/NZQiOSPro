@@ -14,13 +14,13 @@ void UncaughtExceptionHandler(NSException *exception);
 int main(int argc, char * argv[]) {
     @autoreleasepool {
         
-        @try {
+//        @try {
             return UIApplicationMain(argc, argv, nil, NSStringFromClass([NZQAppDelegate class]));
-        } @catch (NSException *exception) {
-            UncaughtExceptionHandler(exception);
-        } @finally {
-        }
-        
+//        } @catch (NSException *exception) {
+//            UncaughtExceptionHandler(exception);
+//        } @finally {
+//        }
+    
         
     }
 }
@@ -28,5 +28,5 @@ int main(int argc, char * argv[]) {
 
 //接收崩溃信息
 void UncaughtExceptionHandler(NSException *exception) {
-    
+    NSLog(@"%@",exception);
 }
