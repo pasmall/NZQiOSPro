@@ -14,5 +14,7 @@
 
 - (void)addRoundedCorners:(UIRectCorner)corners;
 - (void)addRoundedCorners:(UIRectCorner)corners WithCornerRadii:(CGSize)radii;
+- (void)addRoundedCorners:(UIRectCorner)corners WithRect:(CGRect)rect WithCornerRadii:(CGSize)radii;
+
 
 @end

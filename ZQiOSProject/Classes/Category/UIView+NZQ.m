@@ -35,4 +35,12 @@
     self.layer.mask = shape;
 }
 
+- (void)addRoundedCorners:(UIRectCorner)corners WithRect:(CGRect)rect WithCornerRadii:(CGSize)radii{
+    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:radii];
+    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
+    [shape setPath:rounded.CGPath];
+    
+    self.layer.mask = shape;
+}
+
 @end

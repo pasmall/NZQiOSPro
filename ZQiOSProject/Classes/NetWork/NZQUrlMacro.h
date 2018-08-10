@@ -17,6 +17,8 @@
 /*建筑定制*/
 #define DataBuildMyCommList     @"DataBuildMyCommList" //我的消息评论
 #define SeeVideoData            @"SeeVideoData"
+#define DataBuildTagsList       @"DataBuildTagsList"
+#define DataBuildSeek           @"DataBuildSeek"
 
 
 #define BaseUrlWith(key)  [NSString stringWithFormat:@"%@%@",BaseUrl,key]

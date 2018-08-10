@@ -110,8 +110,7 @@
 
 #pragma mark 自定义代码
 
-- (NSMutableAttributedString *)changeTitle:(NSString *)curTitle
-{
+- (NSMutableAttributedString *)changeTitle:(NSString *)curTitle{
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:curTitle ?: @""];
     
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, title.length)];

@@ -28,13 +28,11 @@
 }
 
 #pragma mark - 加载框
-- (void)showLoading
-{
+- (void)showLoading{
     [MBProgressHUD showProgressToView:self.view Text:@"加载中..."];
 }
 
-- (void)dismissLoading
-{
+- (void)dismissLoading{
     [MBProgressHUD hideHUDForView:self.view];
 }
 

@@ -11,6 +11,10 @@
 #import "NZQWorkCell.h"
 #import "NZQProjectCell.h"
 #import <ZFPlayer.h>
+#import "NZQSelectTypeViewController.h"
+
+//跳转
+#import "NZQUpVide0ViewController.h"
 
 
 @interface NZQCustonBuildHomePage ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -33,12 +37,6 @@
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)setUI{
     
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 90)];
@@ -53,7 +51,8 @@
     
     NZQWeak(self);
     [upVideoBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
-        
+        NZQUpVide0ViewController *vc = [[NZQUpVide0ViewController alloc]initWithTitle:@"基建定制上传"];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
     
     
@@ -81,21 +80,8 @@
 - (void)loadMore:(BOOL)isMore{
     
     NZQWeak(self);
-    NSDictionary *para;
-    
-    if (isMore) {
-        self.page += 1;
-        para = @{@"uid":userID,
-                 @"page":@(self.page),
-                 };
-    }else{
-        self.page = 1;
-        para = @{@"uid":userID,
-                 @"page":@(self.page),
-                 };
-    }
 
-    [[NZQRequestManager sharedManager] GET:BaseUrlWith(SeeVideoData) parameters:para completion:^(NZQBaseResponse *response) {
+    [[NZQRequestManager sharedManager] GET:BaseUrlWith(SeeVideoData) parameters:@{@"uid":userID} completion:^(NZQBaseResponse *response) {
         [weakself endHeaderFooterRefreshing];
 
         if (response.error) {
@@ -116,9 +102,10 @@
 
         NZQWorkList *workList = [NZQWorkList modelWithDictionary:response.responseObject[@"ext"][@"data"]];
         if (isMore) {
-            [weakself.dataArray removeAllObjects];
+            
             [weakself.dataArray addObjectsFromArray:workList.list];
         }else{
+            [weakself.dataArray removeAllObjects];
             [weakself.dataArray addObjectsFromArray:workList.list];
         }
 
@@ -205,7 +192,10 @@
 }
 
 - (void)rightButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{
-    
+    NZQSelectTypeViewController *selectVc = [[NZQSelectTypeViewController alloc]initWithCallBack:^(NSArray *array) {
+        
+    }];
+    [self.navigationController pushViewController:selectVc animated:YES];
 }
 
 -(void)titleClickEvent:(UILabel *)sender navigationBar:(NZQNavigationBar *)navigationBar{
