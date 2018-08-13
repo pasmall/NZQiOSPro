@@ -75,6 +75,9 @@
 + (UIColor *)zqGrayColor{
     return COLOR(187, 187, 187);
 }
++ (UIColor *)zqLightGrayColor{
+    return COLOR(230, 230, 230);
+}
 + (UIColor *)zqBlueColor{
     return COLOR(45, 115, 251);
 }

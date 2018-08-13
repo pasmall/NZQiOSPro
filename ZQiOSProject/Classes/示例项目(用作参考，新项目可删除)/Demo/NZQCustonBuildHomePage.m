@@ -23,6 +23,7 @@
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)ZFPlayerView *playerView;
 @property (nonatomic,strong)UICollectionView *collectionView;
+@property (nonatomic,strong)NSArray *collectDataArray;
 
 @end
 
@@ -73,7 +74,10 @@
     [headerView addSubview:_collectionView];
     
     self.tableView.tableHeaderView = headerView;
+}
 
+- (void)loadCustomData{
+    
 }
 
 
@@ -287,6 +291,13 @@
         _dataArray  = [NSMutableArray array];
     }
     return _dataArray;
+}
+
+- (NSArray *)collectDataArray{
+    if (!_collectDataArray) {
+        _collectDataArray  = [NSMutableArray array];
+    }
+    return _collectDataArray;
 }
 
 - (ZFPlayerView *)playerView{

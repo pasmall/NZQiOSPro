@@ -10,6 +10,7 @@
 #import "NZQPickPhotoTool.h"
 #import "NZQUpLoadImageCell.h"
 #import "NZQVerticalFlowLayout.h"
+#import <ZFPlayer.h>
 
 #import <TZImagePickerController.h>
 
@@ -21,8 +22,18 @@
 @property (nonatomic,strong)UIView *imgBgView;
 @property (nonatomic,strong)UIImageView *playImg;
 @property (nonatomic,strong)UIImageView *videoImage;
+@property (nonatomic,strong)NSURL *videoUrl;
+@property (nonatomic,strong)ZFPlayerView *playerView;
+@property (nonatomic,strong)UIView *downView;
+@property (nonatomic,strong)UILabel *selectTagLab;
+@property (nonatomic,strong)UIView *containerView;
+@property (nonatomic,strong)UITextField *titleTF;
+@property (nonatomic,strong)UITextView *textView;
+@property (nonatomic,strong)NSMutableDictionary *upParam;
+
 
 @end
+
 
 @implementation NZQUpVide0ViewController
 
@@ -41,14 +52,15 @@
     scrollView.bounces = YES;
     scrollView.showsVerticalScrollIndicator = YES;
     scrollView.backgroundColor = [UIColor whiteColor];
+    scrollView.tag = 100;
     [self.view addSubview:scrollView];
     scrollView.frame = CGRectMake(0, self.nzq_navgationBar.bottom, self.view.width, self.view.height - self.nzq_navgationBar.bottom );
 
     
-    UIView *containerView = [[UIView alloc] init];
-    containerView.backgroundColor = [UIColor bgViewColor];
-    [scrollView addSubview:containerView];
-    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _containerView = [[UIView alloc] init];
+    _containerView.backgroundColor = [UIColor bgViewColor];
+    [scrollView addSubview:_containerView];
+    [_containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);
         make.right.offset(0);
         make.top.offset(0);
@@ -58,15 +70,14 @@
 
     UIView *upVideView = [[UIView alloc]init];
     upVideView.backgroundColor = [UIColor whiteColor];
-    [containerView addSubview:upVideView];
+    [_containerView addSubview:upVideView];
     
     [upVideView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
         make.height.mas_equalTo(180);
     }];
     
-    _videoImage = [[UIImageView alloc]init];
-    _videoImage.backgroundColor = [UIColor orangeColor];
+    _videoImage = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_input_film_1"]];
     [upVideView addSubview:_videoImage];
     [_videoImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(NZQSpace);
@@ -90,7 +101,7 @@
     //图片选择
     self.imgBgView = [[UIView alloc]init];
     _imgBgView.backgroundColor = [UIColor blueColor];
-    [containerView addSubview:_imgBgView];
+    [_containerView addSubview:_imgBgView];
     [_imgBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(upVideView.mas_bottom).offset(NZQSpace);
         make.left.right.mas_equalTo(0);
@@ -116,7 +127,7 @@
     //标题
     UIView *textFiledView = [[UIView alloc]init];
     textFiledView.backgroundColor = [UIColor whiteColor];
-    [containerView addSubview:textFiledView];
+    [_containerView addSubview:textFiledView];
     [textFiledView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(weakself.imgBgView.mas_bottom).offset(NZQSpace);
         make.left.right.mas_equalTo(0);
@@ -134,19 +145,19 @@
         make.width.mas_equalTo(60);
     }];
     
-    UITextField *titleTF = [[UITextField alloc]init];
-    titleTF.placeholder = @"请输入";
-    titleTF.font = [UIFont systemFontOfSize:16];
-    [textFiledView addSubview:titleTF];
-    [titleTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    _titleTF = [[UITextField alloc]init];
+    _titleTF.placeholder = @"请输入";
+    _titleTF.font = [UIFont systemFontOfSize:16];
+    [textFiledView addSubview:_titleTF];
+    [_titleTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.right.mas_equalTo(0);
         make.left.mas_equalTo(titleLab.mas_right);
     }];
     
-    UIView *downView = [[UIView alloc]init];
-    downView.backgroundColor = [UIColor whiteColor];
-    [containerView addSubview:downView];
-    [downView mas_makeConstraints:^(MASConstraintMaker *make) {
+    _downView = [[UIView alloc]init];
+    _downView.backgroundColor = [UIColor whiteColor];
+    [_containerView addSubview:_downView];
+    [_downView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(textFiledView.mas_bottom).offset(NZQSpace);
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(260);
@@ -156,7 +167,7 @@
     titleLab2.font = [UIFont systemFontOfSize:16];
     titleLab2.textColor = [UIColor blackColor];
     titleLab2.text = @"描述";
-    [downView addSubview:titleLab2];
+    [_downView addSubview:titleLab2];
     [titleLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(NZQSpace);
@@ -164,15 +175,15 @@
         make.height.mas_equalTo(54);
     }];
     
-    UITextView *textView = [[UITextView alloc]init];
+    _textView = [[UITextView alloc]init];
     NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString:@"请输入"];
     [title addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, title.length)];
     [title addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(0, title.length)];
-    textView.attributedPlaceholder = title;
-    textView.font = [UIFont systemFontOfSize:16];
+    _textView.attributedPlaceholder = title;
+    _textView.font = [UIFont systemFontOfSize:16];
     
-    [downView addSubview:textView];
-    [textView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_downView addSubview:_textView];
+    [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(titleLab2.mas_bottom);
         make.left.mas_equalTo(NZQSpace);
         make.right.mas_equalTo(-NZQSpace);
@@ -185,19 +196,36 @@
     tagBtn.font = [UIFont systemFontOfSize:15];
     tagBtn.textAlignment= NSTextAlignmentCenter;
     tagBtn.backgroundColor = [UIColor bgViewColor];
-    [downView addSubview:tagBtn];
+    [_downView addSubview:tagBtn];
     [tagBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(textView.mas_bottom);
+        make.top.mas_equalTo(weakself.textView.mas_bottom);
         make.left.mas_equalTo(NZQSpace);
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(34);
     }];
     [tagBtn addRoundedCorners:UIRectCornerAllCorners WithRect:CGRectMake(0, 0, 80, 34) WithCornerRadii:CGSizeMake(17, 17)];
+    tagBtn.userInteractionEnabled = YES;
     [tagBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
         NZQSelectTypeViewController *selectVc = [[NZQSelectTypeViewController alloc]initWithCallBack:^(NSArray *array) {
-            
+            [weakself selectEventWithType:array.firstObject];
         }];
-        [self.navigationController pushViewController:selectVc animated:YES];
+        [weakself.navigationController pushViewController:selectVc animated:YES];
+    }];
+    
+    
+    _selectTagLab = [[UILabel alloc]init];
+    _selectTagLab.text = @"#标签#";
+    _selectTagLab.textColor = [UIColor blackColor];
+    _selectTagLab.font = [UIFont systemFontOfSize:15];
+    _selectTagLab.textAlignment= NSTextAlignmentCenter;
+    _selectTagLab.backgroundColor = [UIColor bgViewColor];
+    _selectTagLab.hidden = YES;
+    [_downView addSubview:_selectTagLab];
+    [_selectTagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(NZQSpace);
+        make.top.mas_equalTo(tagBtn.mas_bottom).offset(10);
+        make.height.mas_equalTo(34);
+        make.width.mas_equalTo(80);
     }];
     
     
@@ -205,25 +233,48 @@
     [upBtn setTitle:@"确认上传" forState:UIControlStateNormal];
     upBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [upBtn setBackgroundImage:[UIImage imageNamed:@"cinct_113"] forState:UIControlStateNormal];
-    [downView addSubview:upBtn];
+    [_downView addSubview:upBtn];
     
     [upBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(44);
         make.right.mas_equalTo(-44);
-        make.bottom.mas_equalTo(downView.bottom).offset(-NZQSpace);
+        make.bottom.mas_equalTo(weakself.downView.bottom).offset(-NZQSpace);
         make.height.mas_equalTo(40);
     }];;
     [upBtn addRoundedCorners:UIRectCornerAllCorners WithRect:CGRectMake(0, 0, self.view.width - 44*2, 40) WithCornerRadii:CGSizeMake(20, 20)];
+    @weakify(self);
     [upBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weak_self tapUpBtnEvent];
+        });
     }];
     
-    [containerView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(downView.mas_bottom);
+    [_containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(weakself.downView.mas_bottom);
     }];
     
     
     
+}
+
+#pragma mark 加载
+- (ZFPlayerView *)playerView{
+    if (!_playerView) {
+        _playerView = [ZFPlayerView sharedPlayerView];
+        _playerView.cellPlayerOnCenter = YES;
+        _playerView.stopPlayWhileCellNotVisable = YES;
+        ZFPlayerShared.isStatusBarHidden = YES;
+    }
+    return _playerView;
+}
+
+- (NSMutableDictionary *)upParam{
+    if (!_upParam) {
+        _upParam = [NSMutableDictionary dictionary];
+        [_upParam setObject:userID forKey:@"uid"];
+        [_upParam setObject:keyID forKey:@"keyid"];
+    }
+    return _upParam;
 }
 
 #pragma  mark - action
@@ -242,9 +293,195 @@
     [self presentViewController:imagePickerVc animated:YES completion:nil];
 }
 
+- (void)tapUpBtnEvent{
+    //上传视频
+    if (!self.videoUrl) {
+        [MBProgressHUD showWarn:@"请上传视频" ToView:self.view];
+        return;
+    }
+    
+    if (self.nzq_selectedImages.count == 0) {
+        [MBProgressHUD showWarn:@"请上传图片" ToView:self.view];
+        return;
+    }
+    
+    if (_titleTF.text.length == 0) {
+        [MBProgressHUD showWarn:@"请输入标题" ToView:self.view];
+        return;
+    }
+    
+    if (_textView.text.length == 0) {
+        [MBProgressHUD showWarn:@"请输入描述信息" ToView:self.view];
+        return;
+    }
+    
+    [MBProgressHUD showMessage:@"上传中" ToView:self.view];
+    
+    [_upParam setObject:_textView.text forKey:@"description"];
+    [_upParam setObject:_titleTF.text forKey:@"title"];
+    
+    @weakify(self);
+    [[NZQRequestManager sharedManager] upload:BaseUrlWith(BuilduploadVideo) parameters:nil formDataBlock:^NSDictionary<NSData *,NZQDataName *> *(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *,NZQDataName *> *needFillDataDict) {
+        
+        NSData *data = [NSData dataWithContentsOfURL:weak_self.videoUrl];
+        needFillDataDict[data] = @"userfile";
+
+        return needFillDataDict;
+    } progress:^(NSProgress *progress) {
+        
+    } completion:^(NZQBaseResponse *response) {
+        
+        if (response.responseObject[@"fpath"] != nil) {
+            [[NSFileManager defaultManager] removeItemAtPath:[weak_self.videoUrl absoluteString] error:nil];
+            [weak_self.upParam setObject:response.responseObject[@"fpath"] forKey:@"video"];
+            [weak_self upImagesEvent];
+        }
+
+    }];
+
+}
+
+- (void)upImagesEvent{
+    @weakify(self);
+    [[NZQRequestManager sharedManager] upload:BaseUrlWith(BuilduploadVideo) parameters:nil formDataBlock:^NSDictionary<NSData *,NZQDataName *> *(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *,NZQDataName *> *needFillDataDict) {
+        
+        [self.nzq_selectedImages enumerateObjectsUsingBlock:^(UIImage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            needFillDataDict[UIImageJPEGRepresentation(obj, 1)] = @"userfile";
+        }];
+        
+        return needFillDataDict;
+    } progress:^(NSProgress *progress) {
+        
+    } completion:^(NZQBaseResponse *response) {
+        if (response.responseObject[@"fpath"] != nil) {
+            [weak_self.upParam setObject:response.responseObject[@"fpath"] forKey:@"pics"];
+            [weak_self startUpRequest];
+        }
+    }];
+    
+}
+
+- (void)startUpRequest{
+    
+    [[NZQRequestManager sharedManager]POST:BaseUrlWith(DataBuildVideo) parameters:_upParam completion:^(NZQBaseResponse *response) {
+        if (response.error) {
+            //错误提示
+            return ;
+        }
+        
+        if (![response.responseObject[@"state"] boolValue]) {
+            //发生错误
+            return ;
+        }else{
+            //成功
+            
+            
+        }
+    }];
+}
+
+
+- (void)selectEventWithType:(NSDictionary *)dataDic{
+    [_upParam setObject:dataDic[@"id"] forKey:@"buildtype"];
+    
+    NSString *content = [NSString stringWithFormat:@"● %@ ●",dataDic[@"content"]];
+    CGFloat width =  [content widthForFont:[UIFont systemFontOfSize:15]] + 20;
+    
+    
+    NSMutableAttributedString *tagStr = [[NSMutableAttributedString alloc] initWithString:content];
+    [tagStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(1, tagStr.length -1)];
+    [tagStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(1, tagStr.length -1)];
+    
+    [tagStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 1)];
+    [tagStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(0, 1)];
+    
+    [tagStr addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(tagStr.length -1, 1)];
+    [tagStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(tagStr.length -1, 1)];
+    
+    self.selectTagLab.attributedText = tagStr;
+    
+    [self.selectTagLab mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(width);
+    }];
+    
+    [self.selectTagLab addRoundedCorners:UIRectCornerAllCorners WithRect:CGRectMake(0, 0, width, 34) WithCornerRadii:CGSizeMake(17, 17)];
+    
+    [self.downView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(310);
+    }];
+    
+    @weakify(self);
+    [_containerView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(weak_self.downView.mas_bottom);
+    }];
+    self.selectTagLab.hidden = NO;
+    
+}
+
 #pragma mark -TZImagePickerControllerDelegate
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(id)asset{
+    [_videoImage setImage:coverImage];
+    _playImg.hidden = NO;
+    [_videoImage removeAllTapGestures];
+    //添加play事件
+    _videoImage.tag = 110;
+    PHAsset *phAsset = (PHAsset *)asset;
+    
+    
+    [self showLoading];
+    if (phAsset.mediaType == PHAssetMediaTypeVideo) {
+        PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+        options.version = PHImageRequestOptionsVersionCurrent;
+        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+        options.networkAccessAllowed = true;
+        PHImageManager *manager = [PHImageManager defaultManager];
+        [manager requestExportSessionForVideo:asset options:options exportPreset:AVAssetExportPresetLowQuality resultHandler:^(AVAssetExportSession * _Nullable exportSession, NSDictionary * _Nullable info){
+            
+            NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+            [formater setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *fileName = [NSString stringWithFormat:@"nzq-%@.mp4",[formater stringFromDate:[NSDate date]]];
+            NSString *outfilePath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/%@", fileName];
+            exportSession.outputURL = [NSURL fileURLWithPath:outfilePath];
+            exportSession.outputFileType = AVFileTypeMPEG4;
+            [exportSession exportAsynchronouslyWithCompletionHandler:^{
+                if ([exportSession status] == AVAssetExportSessionStatusCompleted) {
+                    
+                    self.videoUrl = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@",outfilePath]];
+                }else{
+                    //发生错误
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self dismissLoading];
+                });
+                
+            }];
+
+        }];
+    }
+    
+    
+    @weakify(self);
+    [_videoImage addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        @strongify(self);
+        
+        if (self.videoUrl == nil) {
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ZFPlayerModel *playerModel = [[ZFPlayerModel alloc] init];
+            playerModel.videoURL         = self.videoUrl;
+            playerModel.placeholderImage = coverImage;
+            playerModel.scrollView = [self.view viewWithTag:100];
+            playerModel.fatherView = self.videoImage;
+            playerModel.fatherViewTag  = self.videoImage.tag;
+            [self.playerView playerControlView:nil playerModel:playerModel];
+            self.playerView.hasDownload = NO;
+            [self.playerView autoPlayTheVideo];
+        });
+    }];
+    
     
 }
 

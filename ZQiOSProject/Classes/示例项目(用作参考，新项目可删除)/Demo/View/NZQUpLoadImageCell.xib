@@ -22,8 +22,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKN-WV-Ruv">
                         <rect key="frame" x="0.0" y="0.0" width="145" height="98"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt2-eQ-K6c">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt2-eQ-K6c">
                                 <rect key="frame" x="0.0" y="0.0" width="145" height="98"/>
+                                <state key="normal" image="icon_input_photo_1"/>
                                 <connections>
                                     <action selector="tapAddBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="kvG-SF-P9e"/>
                                 </connections>
@@ -76,4 +77,7 @@
             <point key="canvasLocation" x="-395" y="-20"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="icon_input_photo_1" width="111" height="83"/>
+    </resources>
 </document>

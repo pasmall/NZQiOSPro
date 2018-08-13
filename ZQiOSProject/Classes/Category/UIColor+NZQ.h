@@ -22,6 +22,7 @@
 + (UIColor *)bgViewColor;
 + (UIColor *)zqWhiteColor;
 + (UIColor *)zqGrayColor;
++ (UIColor *)zqLightGrayColor;
 + (UIColor *)zqBlueColor;
 
 @end

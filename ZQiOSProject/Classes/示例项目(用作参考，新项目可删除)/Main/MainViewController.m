@@ -31,10 +31,15 @@
 - (void)loadData{
     NZQWordArrowItem *item0 = [NZQWordArrowItem itemWithTitle:@"通用链接跳转" subTitle: @"根据连接跳转到APP,并打开某个页面"];
     
-    
+
     NZQItemSection *section = [NZQItemSection sectionWithItems:@[item0] andHeaderTitle:nil footerTitle:nil];
     
     [self.sections addObject:section];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 #pragma mark - 导航栏样式定义

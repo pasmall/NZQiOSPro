@@ -22,6 +22,7 @@ static const CGFloat NZQSpacing = 15;
 
 @property (nonatomic,assign)BOOL isMulti;
 @property (nonatomic,strong)UILabel *titleLab2;
+@property (nonatomic,strong)NZQSelectTypeCell *lastCell;
 
 @end
 
@@ -105,14 +106,20 @@ static const CGFloat NZQSpacing = 15;
             return;
         }
         
-        NSMutableString *string = [NSMutableString string];
-        for (NSString *str in weakself.selectStrings) {
-            [string appendString:str];
-            [string appendString:@","];
+        if (weakself.zqTypesBlock) {
+            [weakself.navigationController popViewControllerAnimated:YES];
+            weakself.zqTypesBlock(weakself.selectStrings);
+        }else{
+            NSMutableString *string = [NSMutableString string];
+            for (NSString *str in weakself.selectStrings) {
+                [string appendString:str];
+                [string appendString:@","];
+            }
+            NZQSubCustonBuildPage *page = [[NZQSubCustonBuildPage alloc]init];
+            page.zqType = string;
+            [weakself.navigationController pushViewController:page animated:YES];
         }
-        NZQSubCustonBuildPage *page = [[NZQSubCustonBuildPage alloc]init];
-        page.zqType = string;
-        [weakself.navigationController pushViewController:page animated:YES];
+        
     }];
     
     
@@ -181,10 +188,30 @@ static const CGFloat NZQSpacing = 15;
     NZQSelectTypeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([NZQSelectTypeCell class]) forIndexPath:indexPath];
     cell.dataDic = dic;
     cell.tapSelectClick = ^(NZQSelectTypeCell *zqCell) {
-        if (zqCell.ImgView.selected) {
-            [weakself.selectStrings addObject:zqCell.dataDic[@"id"]];
+        
+        if (zqCell == nil) {
+            return ;
+        }
+        
+        if (weakself.zqTypesBlock) {
+            if (zqCell.ImgView.selected) {
+                if (weakself.lastCell == nil) {
+                    [weakself.selectStrings addObject:zqCell.dataDic];
+                }else{
+                    [weakself.lastCell cancelSelected];
+                    weakself.selectStrings = [NSMutableArray arrayWithObject:zqCell.dataDic];
+                }
+                weakself.lastCell = zqCell;
+                
+            }else{
+                [weakself.selectStrings removeObject:zqCell.dataDic];
+            }
         }else{
-            [weakself.selectStrings removeObject:zqCell.dataDic[@"id"]];
+            if (zqCell.ImgView.selected) {
+                [weakself.selectStrings addObject:zqCell.dataDic[@"id"]];
+            }else{
+                [weakself.selectStrings removeObject:zqCell.dataDic[@"id"]];
+            }
         }
     };
 

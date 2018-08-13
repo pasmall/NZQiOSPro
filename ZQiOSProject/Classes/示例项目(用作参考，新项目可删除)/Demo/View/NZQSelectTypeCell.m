@@ -27,6 +27,11 @@
     }];
 }
 
+- (void)cancelSelected{
+    self.ImgView.selected = NO;
+    self.subImgView.selected = self.ImgView.selected;
+}
+
 
 - (void)setDataDic:(NSDictionary *)dataDic{
     _dataDic = dataDic;

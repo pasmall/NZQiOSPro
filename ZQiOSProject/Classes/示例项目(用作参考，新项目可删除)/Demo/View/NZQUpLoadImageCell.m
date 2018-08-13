@@ -28,7 +28,6 @@
 - (void)setupUIOnce{
     self.addBtn.hidden = self.imgView.hidden = self.delBtn.hidden = YES;
     self.addBtn.hidden = NO;
-    self.addBtn.backgroundColor = [UIColor orangeColor];
 }
 
 - (void)setPhotoImage:(UIImage *)photoImage{

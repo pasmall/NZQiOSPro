@@ -82,6 +82,7 @@
 		68CDADC6211840A80009527F /* ZJTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADBE211840A80009527F /* ZJTitleView.m */; };
 		68CDADC92118438C0009527F /* NZQSubMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADC82118438C0009527F /* NZQSubMessageViewController.m */; };
 		68CDADCC211853060009527F /* NZQFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CDADCB211853060009527F /* NZQFansViewController.m */; };
+		68F59F922121793500C348B2 /* NZQFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F59F912121793500C348B2 /* NZQFileManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,8 @@
 		68CDADC82118438C0009527F /* NZQSubMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQSubMessageViewController.m; sourceTree = "<group>"; };
 		68CDADCA211853060009527F /* NZQFansViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQFansViewController.h; sourceTree = "<group>"; };
 		68CDADCB211853060009527F /* NZQFansViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQFansViewController.m; sourceTree = "<group>"; };
+		68F59F902121793500C348B2 /* NZQFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQFileManager.h; sourceTree = "<group>"; };
+		68F59F912121793500C348B2 /* NZQFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQFileManager.m; sourceTree = "<group>"; };
 		73DB18B339588898E2612FD1 /* Pods-ZQiOSProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZQiOSProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZQiOSProject/Pods-ZQiOSProject.release.xcconfig"; sourceTree = "<group>"; };
 		9BF22ACBA3FC9B5021074B3C /* libPods-ZQiOSProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZQiOSProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -420,6 +423,8 @@
 				689BA34A21193F930022336F /* NZQEasyBlankPageView.m */,
 				6898034C211C16CE00AE2A24 /* JXTAlertController.h */,
 				6898034D211C16CE00AE2A24 /* JXTAlertController.m */,
+				68F59F902121793500C348B2 /* NZQFileManager.h */,
+				68F59F912121793500C348B2 /* NZQFileManager.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -840,6 +845,7 @@
 				68980340211BE46E00AE2A24 /* NZQElementsFlowLayout.m in Sources */,
 				686E39252112D7DC00DE73E9 /* NZQRequestManager.m in Sources */,
 				68CDADC2211840A80009527F /* ZJContentView.m in Sources */,
+				68F59F922121793500C348B2 /* NZQFileManager.m in Sources */,
 				68CDADCC211853060009527F /* NZQFansViewController.m in Sources */,
 				68B8A12F2113E38F004DE94C /* NZQBaseViewController.m in Sources */,
 				68B8A148211434FD004DE94C /* NZQTabBarController.m in Sources */,

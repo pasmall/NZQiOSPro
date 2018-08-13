@@ -19,6 +19,9 @@
 #define SeeVideoData            @"SeeVideoData"
 #define DataBuildTagsList       @"DataBuildTagsList"
 #define DataBuildSeek           @"DataBuildSeek"
+#define BuilduploadVideo        @"BuilduploadVideo"
+#define Buildupload             @"Buildupload"
+#define DataBuildVideo          @"DataBuildVideo"
 
 
 #define BaseUrlWith(key)  [NSString stringWithFormat:@"%@%@",BaseUrl,key]
