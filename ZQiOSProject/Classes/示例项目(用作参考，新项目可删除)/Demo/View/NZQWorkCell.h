@@ -12,6 +12,7 @@
 @class NZQWorkCell;
 
 typedef void (^tapPlayBtnBlock) (NZQWorkCell *cell);
+typedef void (^tapHeaderBtnBlock) (NZQWorkCell *cell);
 
 @interface NZQWorkCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
@@ -34,6 +35,7 @@ typedef void (^tapPlayBtnBlock) (NZQWorkCell *cell);
 @property (nonatomic , strong) NZQWorkModel *dataModel;
 
 @property(nonatomic, copy) tapPlayBtnBlock PlayBlock;
+@property(nonatomic, copy) tapHeaderBtnBlock HeaderBlock;
 
 + (instancetype)workCellWithTableView:(UITableView *)tableView;
 + (instancetype)workCell2WithTableView:(UITableView *)tableView;

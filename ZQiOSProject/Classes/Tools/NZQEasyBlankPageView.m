@@ -31,15 +31,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        
+        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(frame.size.height * 0.3);
+            make.centerX.offset(0);
+        }];
+        
+        
         [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.offset(0);
             make.left.right.equalTo(self.imageView);
-            make.top.mas_offset(frame.size.height * 0.2);
-        }];
-        
-        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.tipLabel.mas_bottom).offset(10);
-            make.centerX.offset(0);
+            make.top.mas_equalTo(self.imageView.mas_bottom).offset(20);
         }];
         
         [self.reloadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,8 +55,7 @@
     return self;
 }
 
-- (void)configWithType:(NZQEasyBlankPageViewType)blankPageType hasData:(BOOL)hasData hasError:(BOOL)hasError reloadButtonBlock:(void(^)(UIButton *sender))block
-{
+- (void)configWithType:(NZQEasyBlankPageViewType)blankPageType hasData:(BOOL)hasData hasError:(BOOL)hasError reloadButtonBlock:(void(^)(UIButton *sender))block{
     if (hasData) {
         [self removeFromSuperview];
         return;
@@ -71,13 +73,26 @@
         self.tipLabel.hidden = NO;
         self.imageView.hidden = NO;
     } else {
-        if (blankPageType == NZQEasyBlankPageViewTypeNoData) {
-            [self.imageView setImage:[UIImage imageNamed:@"common_noRecord"]];
-            self.tipLabel.text = @"暂无数据";
-            self.reloadBtn.hidden = NO;
-            self.tipLabel.hidden = NO;
-            self.imageView.hidden = NO;
+        
+        switch (blankPageType) {
+            case NZQEasyBlankPageViewTypeNoData:{
+                [self.imageView setImage:[UIImage imageNamed:@"bg_default_normaldata"]];
+                self.tipLabel.text = @"暂无数据";
+                self.reloadBtn.hidden = YES;
+                self.tipLabel.hidden = NO;
+                self.imageView.hidden = NO;
+                
+            }
+                break;
+            case NZQEasyBlankPageViewTypeService:{
+                
+            }
+                break;
+                
+            default:
+                break;
         }
+
     }
 }
 
@@ -103,8 +118,7 @@
     return _reloadBtn;
 }
 
-- (YYAnimatedImageView *)imageView
-{
+- (YYAnimatedImageView *)imageView{
     if(!_imageView)
     {
         YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] init];
@@ -115,8 +129,7 @@
     return _imageView;
 }
 
-- (UILabel *)tipLabel
-{
+- (UILabel *)tipLabel{
     if(!_tipLabel)
     {
         UILabel *label = [[UILabel alloc] init];
@@ -124,9 +137,9 @@
         _tipLabel = label;
         label.numberOfLines = 0;
         label.textAlignment = NSTextAlignmentCenter;
-        label.backgroundColor = [UIColor lightGrayColor];
+        label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor blackColor];
-        label.font = [UIFont systemFontOfSize:16];
+        label.font = [UIFont systemFontOfSize:15];
     }
     return _tipLabel;
 }

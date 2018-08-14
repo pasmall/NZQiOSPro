@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    NZQEasyBlankPageViewTypeNoData
+    NZQEasyBlankPageViewTypeNoData,
+    NZQEasyBlankPageViewTypeService
 } NZQEasyBlankPageViewType;
 
 @interface NZQEasyBlankPageView : UIView

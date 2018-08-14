@@ -61,7 +61,7 @@
     hud.label.text=text;
     hud.label.font= [UIFont systemFontOfSize:15];
     // 代表需要蒙版效果
-    hud.backgroundView.style = MBProgressHUDBackgroundStyleBlur;
+    hud.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
     
     return hud;
 }

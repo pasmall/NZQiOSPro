@@ -15,6 +15,8 @@
 
 //跳转
 #import "NZQUpVide0ViewController.h"
+#import "NZQProjectInfoViewController.h"
+#import "NZQCardInfoViewController.h"
 
 
 @interface NZQCustonBuildHomePage ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -34,20 +36,22 @@
     
     [self setUI];
     self.page = 1;
+    [self loadCustomData];
     [self loadMore:NO];
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
 }
 - (void)setUI{
     
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 90)];
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.width,100)];
     headerView.backgroundColor = [UIColor whiteColor];
     
     CGFloat NZQSpace = 15;
-    UIImageView *upVideoBtn = [[UIImageView alloc]initWithFrame:CGRectMake(NZQSpace * 0.5, NZQSpace, headerView.height -20, headerView.height -20)];
+    UIButton *upVideoBtn = [[UIButton alloc]initWithFrame:CGRectMake(NZQSpace * 0.5, NZQSpace, headerView.height -20, headerView.height -20)];
     [upVideoBtn addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(8, 8)];
-    upVideoBtn.userInteractionEnabled = YES;
-    upVideoBtn.backgroundColor = [UIColor redColor];
+    
+    [upVideoBtn setImage:[UIImage imageNamed:@"btn_addshow"] forState:UIControlStateNormal];
+    [upVideoBtn setBackgroundImage:[UIImage imageNamed:@"cinct_113" ] forState:UIControlStateNormal];
     [headerView addSubview:upVideoBtn];
     
     NZQWeak(self);
@@ -60,7 +64,7 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 0;
-    layout.itemSize = CGSizeMake( 110 , upVideoBtn.height);
+    layout.itemSize = CGSizeMake( 120 , upVideoBtn.height);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(upVideoBtn.right + NZQSpace * 0.5,upVideoBtn.top,headerView.width - upVideoBtn.right -  NZQSpace * 0.5,upVideoBtn.height) collectionViewLayout:layout];
@@ -77,7 +81,25 @@
 }
 
 - (void)loadCustomData{
-    
+
+    @weakify(self);
+    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildInfo) parameters:nil completion:^(NZQBaseResponse *response) {
+        if (response.error) {
+            //错误提示
+            return ;
+        }
+        
+        if (![response.responseObject[@"state"] boolValue]) {
+            //发生错误
+            return ;
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weak_self.collectDataArray = response.responseObject[@"ext"][@"page"][@"list"];
+                [weak_self.collectionView reloadData];
+            });
+        }
+    }];
+ 
 }
 
 
@@ -241,27 +263,29 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     
 }
 
 #pragma  mark UICollectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return 5;
+    return self.collectDataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSDictionary *dic = self.collectDataArray[indexPath.row];
     NZQProjectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([NZQProjectCell class]) forIndexPath:indexPath];
+    cell.dataDic = dic;
     
     return cell;
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [self.navigationController pushViewController:[NZQProjectInfoViewController new] animated:YES];
 }
 
 

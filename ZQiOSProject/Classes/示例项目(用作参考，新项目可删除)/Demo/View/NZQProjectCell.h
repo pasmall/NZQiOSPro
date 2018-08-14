@@ -10,5 +10,8 @@
 
 @interface NZQProjectCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImg;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *timeLab;
 
+@property (nonatomic,strong)NSDictionary *dataDic;
 @end

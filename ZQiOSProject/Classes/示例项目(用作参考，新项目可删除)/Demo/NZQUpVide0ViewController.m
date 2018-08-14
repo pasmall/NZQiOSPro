@@ -15,6 +15,7 @@
 #import <TZImagePickerController.h>
 
 #import "NZQSelectTypeViewController.h"
+#import "NZQContactViewController.h"
 
 @interface NZQUpVide0ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,NZQVerticalFlowLayoutDelegate,TZImagePickerControllerDelegate>
 
@@ -363,6 +364,7 @@
 
 - (void)startUpRequest{
     
+    @weakify(self);
     [[NZQRequestManager sharedManager]POST:BaseUrlWith(DataBuildVideo) parameters:_upParam completion:^(NZQBaseResponse *response) {
         if (response.error) {
             //错误提示
@@ -374,8 +376,7 @@
             return ;
         }else{
             //成功
-            
-            
+            [weak_self.navigationController pushViewController:[[NZQContactViewController alloc]initWithTitle:self.title] animated:YES];
         }
     }];
 }
@@ -429,7 +430,7 @@
     PHAsset *phAsset = (PHAsset *)asset;
     
     
-    [self showLoading];
+    [MBProgressHUD showProgressToView:self.view Text:@"处理中..."];
     if (phAsset.mediaType == PHAssetMediaTypeVideo) {
         PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
         options.version = PHImageRequestOptionsVersionCurrent;

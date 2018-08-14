@@ -59,6 +59,11 @@
 		689BA35F211977E70022336F /* UIView+NZQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA35E211977E70022336F /* UIView+NZQ.m */; };
 		689BA36221198DE60022336F /* UINavigationController+StatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA36121198DE60022336F /* UINavigationController+StatusBarStyle.m */; };
 		689BA365211998ED0022336F /* NZQCustonBuildHomePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 689BA364211998ED0022336F /* NZQCustonBuildHomePage.m */; };
+		68AAFCD821226A2600FD8230 /* NZQContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AAFCD621226A2600FD8230 /* NZQContactViewController.m */; };
+		68AAFCD921226A2600FD8230 /* NZQContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68AAFCD721226A2600FD8230 /* NZQContactViewController.xib */; };
+		68AAFCDE2122877600FD8230 /* NZQProjectInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AAFCDC2122877600FD8230 /* NZQProjectInfoViewController.m */; };
+		68AAFCE62122E00400FD8230 /* NZQCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AAFCE42122E00400FD8230 /* NZQCardInfoViewController.m */; };
+		68AAFCE72122E00400FD8230 /* NZQCardInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68AAFCE52122E00400FD8230 /* NZQCardInfoViewController.xib */; };
 		68B8A12F2113E38F004DE94C /* NZQBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A12E2113E38F004DE94C /* NZQBaseViewController.m */; };
 		68B8A1322113E5E4004DE94C /* NZQTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A1312113E5E4004DE94C /* NZQTableViewController.m */; };
 		68B8A13821140AB9004DE94C /* NZQWordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8A13721140AB9004DE94C /* NZQWordItem.m */; };
@@ -203,6 +208,14 @@
 		689BA36121198DE60022336F /* UINavigationController+StatusBarStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+StatusBarStyle.m"; sourceTree = "<group>"; };
 		689BA363211998ED0022336F /* NZQCustonBuildHomePage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQCustonBuildHomePage.h; sourceTree = "<group>"; };
 		689BA364211998ED0022336F /* NZQCustonBuildHomePage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQCustonBuildHomePage.m; sourceTree = "<group>"; };
+		68AAFCD521226A2600FD8230 /* NZQContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQContactViewController.h; sourceTree = "<group>"; };
+		68AAFCD621226A2600FD8230 /* NZQContactViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQContactViewController.m; sourceTree = "<group>"; };
+		68AAFCD721226A2600FD8230 /* NZQContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQContactViewController.xib; sourceTree = "<group>"; };
+		68AAFCDB2122877600FD8230 /* NZQProjectInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQProjectInfoViewController.h; sourceTree = "<group>"; };
+		68AAFCDC2122877600FD8230 /* NZQProjectInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQProjectInfoViewController.m; sourceTree = "<group>"; };
+		68AAFCE32122E00400FD8230 /* NZQCardInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQCardInfoViewController.h; sourceTree = "<group>"; };
+		68AAFCE42122E00400FD8230 /* NZQCardInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQCardInfoViewController.m; sourceTree = "<group>"; };
+		68AAFCE52122E00400FD8230 /* NZQCardInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQCardInfoViewController.xib; sourceTree = "<group>"; };
 		68B8A12D2113E38F004DE94C /* NZQBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQBaseViewController.h; sourceTree = "<group>"; };
 		68B8A12E2113E38F004DE94C /* NZQBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQBaseViewController.m; sourceTree = "<group>"; };
 		68B8A1302113E5E4004DE94C /* NZQTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQTableViewController.h; sourceTree = "<group>"; };
@@ -512,6 +525,18 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		68AAFCDA2122874700FD8230 /* 视频详情页 */ = {
+			isa = PBXGroup;
+			children = (
+				68AAFCDB2122877600FD8230 /* NZQProjectInfoViewController.h */,
+				68AAFCDC2122877600FD8230 /* NZQProjectInfoViewController.m */,
+				68AAFCE32122E00400FD8230 /* NZQCardInfoViewController.h */,
+				68AAFCE42122E00400FD8230 /* NZQCardInfoViewController.m */,
+				68AAFCE52122E00400FD8230 /* NZQCardInfoViewController.xib */,
+			);
+			path = "视频详情页";
+			sourceTree = "<group>";
+		};
 		68B8A1342114083C004DE94C /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +595,10 @@
 				6898376C211D322A00E3CF9E /* NZQSelectTypeViewController.m */,
 				68137C9C211D8332006A4932 /* NZQSubCustonBuildPage.h */,
 				68137C9D211D8332006A4932 /* NZQSubCustonBuildPage.m */,
+				68AAFCD521226A2600FD8230 /* NZQContactViewController.h */,
+				68AAFCD621226A2600FD8230 /* NZQContactViewController.m */,
+				68AAFCD721226A2600FD8230 /* NZQContactViewController.xib */,
+				68AAFCDA2122874700FD8230 /* 视频详情页 */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -720,7 +749,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68AAFCE72122E00400FD8230 /* NZQCardInfoViewController.xib in Resources */,
 				6851EB7B211A8D0600DEF4CA /* NZQWorkCell.xib in Resources */,
+				68AAFCD921226A2600FD8230 /* NZQContactViewController.xib in Resources */,
 				686E38EF21129C1200DE73E9 /* Assets.xcassets in Resources */,
 				68137C9B211D6D42006A4932 /* NZQSelectTypeCell.xib in Resources */,
 				689BA35C211972E90022336F /* NZQFansCell.xib in Resources */,
@@ -839,6 +870,7 @@
 				689BA365211998ED0022336F /* NZQCustonBuildHomePage.m in Sources */,
 				689BA34B21193F930022336F /* NZQEasyBlankPageView.m in Sources */,
 				68137C9A211D6D42006A4932 /* NZQSelectTypeCell.m in Sources */,
+				68AAFCD821226A2600FD8230 /* NZQContactViewController.m in Sources */,
 				686E392C2112E1C000DE73E9 /* UIView+GestureCallback.m in Sources */,
 				686E393C2112F2BC00DE73E9 /* NZQNavigationBar.m in Sources */,
 				68CDADC92118438C0009527F /* NZQSubMessageViewController.m in Sources */,
@@ -856,9 +888,11 @@
 				686E39482112FB9300DE73E9 /* NZQNavUIBaseViewController.m in Sources */,
 				686E39292112E05A00DE73E9 /* NullSafe.m in Sources */,
 				68CDADBF211840A80009527F /* UIView+ZJFrame.m in Sources */,
+				68AAFCE62122E00400FD8230 /* NZQCardInfoViewController.m in Sources */,
 				68CDADC3211840A80009527F /* ZJScrollPageView.m in Sources */,
 				6898033A211BD2F200AE2A24 /* NZQVerticalFlowLayout.m in Sources */,
 				686E394B2113012B00DE73E9 /* MBProgressHUD+NZQ.m in Sources */,
+				68AAFCDE2122877600FD8230 /* NZQProjectInfoViewController.m in Sources */,
 				68CDADC4211840A80009527F /* ZJScrollSegmentView.m in Sources */,
 				68B8A14E21143BB3004DE94C /* BasicKnowViewController.m in Sources */,
 				686E38E721129C1000DE73E9 /* NZQAppDelegate.m in Sources */,

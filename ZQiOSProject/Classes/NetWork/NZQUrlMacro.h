@@ -22,6 +22,9 @@
 #define BuilduploadVideo        @"BuilduploadVideo"
 #define Buildupload             @"Buildupload"
 #define DataBuildVideo          @"DataBuildVideo"
+#define DataBuildInfo           @"DataBuildInfo"
+#define DataBuildInfoDet        @"DataBuildInfoDet"
+#define DataBuildSeeVideoOne    @"DataBuildSeeVideoOne"
 
 
 #define BaseUrlWith(key)  [NSString stringWithFormat:@"%@%@",BaseUrl,key]

@@ -12,6 +12,7 @@
 #import "NZQProjectCell.h"
 #import <ZFPlayer.h>
 
+
 @interface NZQSubCustonBuildPage ()
 @property (nonatomic,assign)NSInteger page;
 @property (nonatomic,assign)NSInteger MaxPage;
@@ -127,7 +128,7 @@
 }
 
 - (NSMutableAttributedString *)nzqNavigationBarTitle:(NZQNavigationBar *)navigationBar{
-    return [self changeTitle:@"建筑定制"];
+    return [self changeTitle:@"建筑定制上传"];
 }
 
 - (void)leftButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{
