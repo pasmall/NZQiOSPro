@@ -7,14 +7,21 @@
 //
 
 #import "NZQProjectCell.h"
+#import "NZQWorkModel.h"
 
 @implementation NZQProjectCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [_contentImg addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(8, 8)];
     _timeLab.backgroundColor =COLORA(0, 0, 0, 0.5);
+    _timeLab2.backgroundColor =COLORA(0, 0, 0, 0.5);
+    
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [_contentImg addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(8, 8)];
     
 }
 
@@ -24,7 +31,21 @@
     [_contentImg setImageURL:[NSURL URLWithString:dataDic[@"thumbnail"]]];
     _titleLab.text = dataDic[@"title"];
     _timeLab.text = [self returnTimeStrWithSeconds:dataDic[@"long_time"]];
+    
+    _timeLab2.hidden = YES;
+    _playImg.hidden = YES;
+    
 }
+
+- (void)setDataModel:(NZQWorkModel *)dataModel{
+    _dataModel = dataModel;
+    _titleLab.hidden = YES;
+    _timeLab.hidden = YES;
+    
+    [_contentImg setImageURL:[NSURL URLWithString:dataModel.logourl]];
+    _timeLab2.text = [self returnTimeStrWithSeconds:dataModel.long_time];
+}
+
 
 - (NSString *)returnTimeStrWithSeconds:(NSString *)seconds{
     NSInteger sec = [seconds integerValue];
@@ -41,11 +62,13 @@
         [str appendString:@"″"];
     }
     
-    [_timeLab mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo([str widthForFont:self.timeLab.font] + 10);
-    }];
+
+    _timeLabWidth.constant = [str widthForFont:self.timeLab.font] + 10;
+    _timeLab2Width.constant = [str widthForFont:self.timeLab.font] + 10;
     
+    [_timeLab2 addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(3, 3)];
     [_timeLab addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(3, 3)];
+    
     return str;
 }
 

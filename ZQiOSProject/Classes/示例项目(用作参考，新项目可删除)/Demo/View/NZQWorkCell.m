@@ -73,13 +73,43 @@ const CGFloat NZQImageWidth = 250;
     if (_bgView) {
         
         [_bgView addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
-//            if (weakself.) {
-//                <#statements#>
-//            }
+            
+        }];
+    }
+    
+    if (_icon) {
+        _icon.userInteractionEnabled = YES;
+        @weakify(self);
+        [_icon addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+            if (weak_self.HeaderBlock) {
+                weak_self.HeaderBlock(weak_self);
+            }
+            
+        }];
+    }
+    
+    if (_icon2) {
+        _icon2.userInteractionEnabled = YES;
+        @weakify(self);
+        [_icon2 addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+            if (weak_self.HeaderBlock) {
+                weak_self.HeaderBlock(weak_self);
+            }
+            
+        }];
+    }
+    
+    if (_bgView) {
+        @weakify(self);
+        [_bgView addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+            if (weak_self.bgViewBlock) {
+                weak_self.bgViewBlock(weak_self);
+            }
         }];
     }
     
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
 }
 

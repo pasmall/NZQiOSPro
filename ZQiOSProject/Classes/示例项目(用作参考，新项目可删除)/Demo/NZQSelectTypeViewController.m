@@ -197,6 +197,9 @@ static const CGFloat NZQSpacing = 15;
             if (zqCell.ImgView.selected) {
                 if (weakself.lastCell == nil) {
                     [weakself.selectStrings addObject:zqCell.dataDic];
+                }else if(weakself.lastCell == cell){
+                    [weakself.lastCell cancelSelected];
+                    weakself.selectStrings = [NSMutableArray arrayWithObject:zqCell.dataDic];
                 }else{
                     [weakself.lastCell cancelSelected];
                     weakself.selectStrings = [NSMutableArray arrayWithObject:zqCell.dataDic];
@@ -206,6 +209,8 @@ static const CGFloat NZQSpacing = 15;
             }else{
                 [weakself.selectStrings removeObject:zqCell.dataDic];
             }
+            
+            
         }else{
             if (zqCell.ImgView.selected) {
                 [weakself.selectStrings addObject:zqCell.dataDic[@"id"]];

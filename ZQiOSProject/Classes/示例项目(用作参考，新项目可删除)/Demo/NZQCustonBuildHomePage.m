@@ -107,7 +107,13 @@
     
     NZQWeak(self);
 
-    [[NZQRequestManager sharedManager] GET:BaseUrlWith(SeeVideoData) parameters:@{@"uid":userID} completion:^(NZQBaseResponse *response) {
+    if (isMore) {
+        _page ++;
+    }else{
+        _page = 15;
+    }
+
+    [[NZQRequestManager sharedManager] GET:BaseUrlWith(SeeVideoData) parameters:@{@"uid":userID,@"page":@(_page)} completion:^(NZQBaseResponse *response) {
         [weakself endHeaderFooterRefreshing];
 
         if (response.error) {
@@ -218,9 +224,7 @@
 }
 
 - (void)rightButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{
-    NZQSelectTypeViewController *selectVc = [[NZQSelectTypeViewController alloc]initWithCallBack:^(NSArray *array) {
-        
-    }];
+    NZQSelectTypeViewController *selectVc = [[NZQSelectTypeViewController alloc]init];
     [self.navigationController pushViewController:selectVc animated:YES];
 }
 
@@ -253,6 +257,19 @@
         [weakself cellPlayClick:cell];
     };
     
+    //点击头像
+    cell.HeaderBlock = ^(NZQWorkCell *cell) {
+
+    };
+    
+    //bgView
+    cell.bgViewBlock = ^(NZQWorkCell *cell) {
+        NZQCardInfoViewController *page = [[NZQCardInfoViewController alloc]init];
+        page.isPic = NO;
+        page.workID = [cell.dataModel.zqId integerValue];
+        [weakself.navigationController pushViewController:page animated:YES];
+    };
+    
 
     return cell;
 }
@@ -265,6 +282,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NZQWorkModel *mode = self.dataArray[indexPath.row];
+    NZQCardInfoViewController *page = [[NZQCardInfoViewController alloc]init];
+    page.isPic = YES;
+    page.workID = [mode.zqId integerValue];
+    [self.navigationController pushViewController:page animated:YES];
     
 }
 

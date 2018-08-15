@@ -14,8 +14,9 @@
     self.layer.shadowOffset = CGSizeMake(0, 0);
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowRadius = 4;
-    self.layer.shadowOpacity = 1;
+    self.layer.shadowOpacity = 0.4;
 }
+
 
 - (void)addRoundedCorners:(UIRectCorner)corners{
     

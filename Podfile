@@ -12,5 +12,8 @@ pod 'IQKeyboardManager',:inhibit_warnings => true
 pod 'Masonry',:inhibit_warnings => true
 pod 'ZFPlayer',:inhibit_warnings => true
 pod 'TZImagePickerController',:inhibit_warnings => true
+pod 'SDCycleScrollView',:inhibit_warnings => true
+pod 'SDWebImage',:inhibit_warnings => true
+
 
 end

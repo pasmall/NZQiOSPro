@@ -10,4 +10,7 @@
 
 @interface NZQCardInfoViewController : NZQBaseViewController
 
+@property (nonatomic,assign)BOOL isPic;
+@property (nonatomic,assign)NSInteger workID;
+
 @end
