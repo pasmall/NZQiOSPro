@@ -9,13 +9,14 @@
 #import "NZQProjectInfoViewController.h"
 #import <WebKit/WebKit.h>
 
-@interface NZQProjectInfoViewController ()
+@interface NZQProjectInfoViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic,strong)UIImageView *videoImage;
 @property (nonatomic,strong)UILabel *titleLab;
 @property (nonatomic,strong)UILabel *timeLab;
 @property (nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong)UIView *containerView;
+@property (nonatomic,strong)UIScrollView *scrollView;
 
 
 @end
@@ -27,6 +28,7 @@
     
     [self setUI];
     [self getData];
+    self.nzq_navgationBar.title = [self changeTitle:@""];
 }
 
 - (void)getData{
@@ -34,7 +36,7 @@
     [self showLoading];
     @weakify(self);
     
-    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildInfoDet) parameters:@{@"id":@(3)} completion:^(NZQBaseResponse *response) {
+    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildInfoDet) parameters:@{@"id":@(_workID),@"uid":userID} completion:^(NZQBaseResponse *response) {
         [weak_self dismissLoading];
         if (response.error) {
             //错误提示
@@ -70,13 +72,14 @@
 
 - (void)setUI{
     
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.bounces = YES;
-    scrollView.showsVerticalScrollIndicator = YES;
-    scrollView.backgroundColor = [UIColor whiteColor];
-    scrollView.tag = 100;
-    [self.view addSubview:scrollView];
-    scrollView.frame = CGRectMake(0, 0, self.view.width, kScreenHeight);
+    self.scrollView = [[UIScrollView alloc] init];
+    _scrollView.bounces = YES;
+    _scrollView.showsVerticalScrollIndicator = YES;
+    _scrollView.backgroundColor = [UIColor whiteColor];
+    _scrollView.tag = 100;
+    _scrollView.delegate = self;
+    [self.view addSubview:_scrollView];
+    _scrollView.frame = CGRectMake(0, 0, self.view.width, kScreenHeight);
     
     UIButton *appointBtn = [[UIButton alloc]initWithFrame:CGRectZero buttonTitle:@"预约" normalBGColor:nil selectBGColor:nil normalColor:[UIColor whiteColor] selectColor:nil buttonFont:[UIFont systemFontOfSize:15] cornerRadius:0 doneBlock:^(UIButton *btn) {
         
@@ -92,13 +95,14 @@
     
     _containerView = [[UIView alloc] init];
     _containerView.backgroundColor = [UIColor whiteColor];
-    [scrollView addSubview:_containerView];
+    [_scrollView addSubview:_containerView];
+    @weakify(self);
     [_containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(0);
         make.right.offset(0);
         make.top.offset(0);
         make.bottom.offset(0);
-        make.width.mas_equalTo(scrollView.width);
+        make.width.mas_equalTo(weak_self.scrollView.width);
     }];
     
 
@@ -117,7 +121,6 @@
     UIImageView *playImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_information_play"]];
     [_videoImage addSubview:playImg];
     
-    @weakify(self);
     [playImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(48, 48));
         make.center.mas_equalTo(weak_self.videoImage).centerOffset(CGPointMake(0,0));
@@ -147,8 +150,15 @@
         make.right.mas_equalTo(-20);
     }];
     
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta); var imgs = document.getElementsByTagName('img');for (var i in imgs){imgs[i].style.maxWidth='100%';imgs[i].style.height='auto';}";
+    
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+    WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+    wkWebConfig.userContentController = wkUController;
 
-    _webView = [[WKWebView alloc]initWithFrame:CGRectZero];
+    _webView = [[WKWebView alloc]initWithFrame:CGRectZero configuration:wkWebConfig];
     [_containerView addSubview:_webView];
     _webView.userInteractionEnabled = NO;
     [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,26 +169,50 @@
     
     [_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
-    
-    
     [_containerView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(weak_self.webView.mas_bottom);
     }];
     
     
 }
+
+#pragma mark - 导航条渐变
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (scrollView != _scrollView) {
+        return;
+    }
+    
+    CGFloat kNavBarHeight = self.nzq_navgationBar.height;
+    CGPoint contentOffset = scrollView.contentOffset;
+    
+    if (contentOffset.y < kNavBarHeight) {
+        self.nzq_navgationBar.backgroundImage = [UIImage imageWithColor:[UIColor clearColor]];
+        self.nzq_navgationBar.title = [self changeTitle:@""];
+    }else if (contentOffset.y >= kNavBarHeight){
+        self.nzq_navgationBar.backgroundImage = [UIImage imageNamed:@"navBackImage"];
+        self.nzq_navgationBar.title = [self changeTitle:self.title];
+    }
+    
+}
+
+
+
 #pragma mark  - KVO回调
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     
-    CGFloat newHeight = self.webView.scrollView.contentSize.height;
+    if (object != _webView.scrollView) {
+        return;
+    }
     
+    CGFloat newHeight = self.webView.scrollView.contentSize.height;
     [self.webView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(newHeight);
     }];
     
     @weakify(self);
     [_containerView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(weak_self.webView.mas_bottom);
+        make.bottom.mas_equalTo(weak_self.webView.mas_bottom).offset(40);
     }];
 }
 
@@ -213,6 +247,10 @@
 
 - (void)leftButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)dealloc{
+    [_webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 @end

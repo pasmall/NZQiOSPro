@@ -11,6 +11,8 @@
 		68137C9A211D6D42006A4932 /* NZQSelectTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68137C98211D6D42006A4932 /* NZQSelectTypeCell.m */; };
 		68137C9B211D6D42006A4932 /* NZQSelectTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68137C99211D6D42006A4932 /* NZQSelectTypeCell.xib */; };
 		68137C9E211D8332006A4932 /* NZQSubCustonBuildPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68137C9D211D8332006A4932 /* NZQSubCustonBuildPage.m */; };
+		683EECCF21251CA6009D8392 /* NZQSubmitInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683EECCD21251CA6009D8392 /* NZQSubmitInfoViewController.m */; };
+		683EECD021251CA6009D8392 /* NZQSubmitInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683EECCE21251CA6009D8392 /* NZQSubmitInfoViewController.xib */; };
 		6851EB76211A838B00DEF4CA /* NZQWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6851EB75211A838B00DEF4CA /* NZQWorkModel.m */; };
 		6851EB7A211A8D0600DEF4CA /* NZQWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6851EB78211A8D0600DEF4CA /* NZQWorkCell.m */; };
 		6851EB7B211A8D0600DEF4CA /* NZQWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6851EB79211A8D0600DEF4CA /* NZQWorkCell.xib */; };
@@ -114,6 +116,9 @@
 		68137C99211D6D42006A4932 /* NZQSelectTypeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQSelectTypeCell.xib; sourceTree = "<group>"; };
 		68137C9C211D8332006A4932 /* NZQSubCustonBuildPage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQSubCustonBuildPage.h; sourceTree = "<group>"; };
 		68137C9D211D8332006A4932 /* NZQSubCustonBuildPage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQSubCustonBuildPage.m; sourceTree = "<group>"; };
+		683EECCC21251CA6009D8392 /* NZQSubmitInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQSubmitInfoViewController.h; sourceTree = "<group>"; };
+		683EECCD21251CA6009D8392 /* NZQSubmitInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQSubmitInfoViewController.m; sourceTree = "<group>"; };
+		683EECCE21251CA6009D8392 /* NZQSubmitInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NZQSubmitInfoViewController.xib; sourceTree = "<group>"; };
 		6851EB74211A838B00DEF4CA /* NZQWorkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQWorkModel.h; sourceTree = "<group>"; };
 		6851EB75211A838B00DEF4CA /* NZQWorkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NZQWorkModel.m; sourceTree = "<group>"; };
 		6851EB77211A8D0600DEF4CA /* NZQWorkCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NZQWorkCell.h; sourceTree = "<group>"; };
@@ -598,6 +603,9 @@
 				68AAFCD521226A2600FD8230 /* NZQContactViewController.h */,
 				68AAFCD621226A2600FD8230 /* NZQContactViewController.m */,
 				68AAFCD721226A2600FD8230 /* NZQContactViewController.xib */,
+				683EECCC21251CA6009D8392 /* NZQSubmitInfoViewController.h */,
+				683EECCD21251CA6009D8392 /* NZQSubmitInfoViewController.m */,
+				683EECCE21251CA6009D8392 /* NZQSubmitInfoViewController.xib */,
 				68AAFCDA2122874700FD8230 /* 视频详情页 */,
 			);
 			path = Demo;
@@ -751,6 +759,7 @@
 			files = (
 				68AAFCE72122E00400FD8230 /* NZQCardInfoViewController.xib in Resources */,
 				6851EB7B211A8D0600DEF4CA /* NZQWorkCell.xib in Resources */,
+				683EECD021251CA6009D8392 /* NZQSubmitInfoViewController.xib in Resources */,
 				68AAFCD921226A2600FD8230 /* NZQContactViewController.xib in Resources */,
 				686E38EF21129C1200DE73E9 /* Assets.xcassets in Resources */,
 				68137C9B211D6D42006A4932 /* NZQSelectTypeCell.xib in Resources */,
@@ -857,6 +866,7 @@
 				686E39352112E95900DE73E9 /* YYFPSLabel.m in Sources */,
 				689BA35F211977E70022336F /* UIView+NZQ.m in Sources */,
 				686E39192112A05400DE73E9 /* NZQConst.m in Sources */,
+				683EECCF21251CA6009D8392 /* NZQSubmitInfoViewController.m in Sources */,
 				68B8A1322113E5E4004DE94C /* NZQTableViewController.m in Sources */,
 				689BA3532119499B0022336F /* NZQCommentCell.m in Sources */,
 				689BA34821193D8B0022336F /* NZQRefreshTableViewController.m in Sources */,

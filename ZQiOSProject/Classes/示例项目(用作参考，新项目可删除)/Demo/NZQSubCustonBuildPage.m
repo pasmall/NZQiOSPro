@@ -128,7 +128,7 @@
 }
 
 - (NSMutableAttributedString *)nzqNavigationBarTitle:(NZQNavigationBar *)navigationBar{
-    return [self changeTitle:@"建筑定制上传"];
+    return [self changeTitle:@"建筑定制"];
 }
 
 - (void)leftButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{

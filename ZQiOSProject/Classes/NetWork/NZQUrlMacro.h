@@ -25,6 +25,7 @@
 #define DataBuildInfo           @"DataBuildInfo"
 #define DataBuildInfoDet        @"DataBuildInfoDet"
 #define DataBuildSeeVideoOne    @"DataBuildSeeVideoOne"
+#define DataBuildCollect        @"DataBuildCollect"
 
 
 #define BaseUrlWith(key)  [NSString stringWithFormat:@"%@%@",BaseUrl,key]

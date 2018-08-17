@@ -54,6 +54,7 @@
     _colPage = 1;
     [self setUI];
     [self getData];
+    [self setBtnsEvent];
 
 }
 
@@ -61,7 +62,7 @@
     
     [self showLoading];
     @weakify(self);
-    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildSeeVideoOne) parameters:@{@"id":@(_workID)} completion:^(NZQBaseResponse *response) {
+    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildSeeVideoOne) parameters:@{@"id":@(_workID),@"uid":userID} completion:^(NZQBaseResponse *response) {
         [weak_self dismissLoading];
         if (response.error) {
             //错误提示
@@ -125,9 +126,11 @@
     
     if ([dic[@"isCollect"] boolValue]) {
         [_colBtn setTitle:dic[@"collectCount"] forState:UIControlStateSelected];
+        [_colBtn setTitle:[NSString stringWithFormat:@"%ld",[dic[@"collectCount"] integerValue] - 1] forState:UIControlStateNormal];
         _colBtn.selected = YES;
     }else{
         [_colBtn setTitle:dic[@"collectCount"] forState:UIControlStateNormal];
+        [_colBtn setTitle:[NSString stringWithFormat:@"%ld",[dic[@"collectCount"] integerValue] + 1] forState:UIControlStateSelected];
         _colBtn.selected = NO;
     }
     
@@ -248,8 +251,9 @@
     lineView.backgroundColor = [UIColor bgViewColor];
     [_bottomView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
+        make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(10);
+        make.top.mas_equalTo(10);
     }];
     
     UILabel *designLab = [[UILabel alloc]init];
@@ -300,6 +304,55 @@
     
 }
 
+#pragma mark - action
+- (void)setBtnsEvent{
+    
+    @weakify(self);
+    //收藏
+    [_colBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        
+        NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"artId":weak_self.dataDic[@"id"]};
+        [[NZQRequestManager sharedManager] POST:BaseUrlWith(DataBuildCollect) parameters:dic completion:^(NZQBaseResponse *response) {
+            [weak_self dismissLoading];
+            if (response.error) {
+                //错误提示
+                return ;
+            }
+            
+            if (![response.responseObject[@"state"] boolValue]) {
+                //发生错误
+                return ;
+            }else{
+                weak_self.colBtn.selected = !weak_self.colBtn.selected;
+            }
+        }];
+        
+    }];
+    
+    //评论
+    [_comBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        
+    }];
+    
+    //分享
+    [_shareBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        
+    }];
+    
+    _icon.userInteractionEnabled = YES;
+    //作者个人中心
+    [_icon addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        
+    }];
+    
+    //关注作者
+    [_focusBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        
+    }];
+    
+}
+
+
 #pragma mark - 导航条渐变
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -324,7 +377,7 @@
 #pragma mark - NZQHorizontalFlowLayoutDelegate
 
 - (CGFloat)waterflowLayout:(NZQHorizontalFlowLayout *)waterflowLayout collectionView:(UICollectionView *)collectionView widthForItemAtIndexPath:(NSIndexPath *)indexPath itemHeight:(CGFloat)itemHeight{
-    return 180;
+    return 160;
 }
 
 - (NSInteger)waterflowLayout:(NZQHorizontalFlowLayout *)waterflowLayout linesInCollectionView:(UICollectionView *)collectionView{
@@ -372,14 +425,18 @@
 }
 
 #pragma mark  - KVO回调
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    
+    if (object != _webView.scrollView) {
+        return;
+    }
     
     CGFloat newHeight = self.webView.scrollView.contentSize.height;
     [self.webView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(newHeight);
     }];
     
-    _contentHeight.constant = (self.webView.bottom + 180 + 20 + 40 + 180)>kScreenHeight?(self.webView.bottom + 180 + 20 + 40 + 180):kScreenHeight;
+    _contentHeight.constant = (self.webView.bottom + 180 + 20 + 40 )>kScreenHeight?(self.webView.bottom + 180 + 20 + 40 ):kScreenHeight;
 
 }
 
@@ -441,6 +498,10 @@
         ZFPlayerShared.isStatusBarHidden = YES;
     }
     return _playerView;
+}
+
+- (void)dealloc{
+    [_webView.scrollView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 @end

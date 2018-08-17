@@ -10,4 +10,6 @@
 
 @interface NZQProjectInfoViewController : NZQBaseViewController
 
+@property (nonatomic,assign)NSInteger workID;
+
 @end

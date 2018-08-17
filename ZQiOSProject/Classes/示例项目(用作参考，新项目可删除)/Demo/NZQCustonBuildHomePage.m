@@ -307,7 +307,11 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [self.navigationController pushViewController:[NZQProjectInfoViewController new] animated:YES];
+    
+    NSDictionary *dic = self.collectDataArray[indexPath.row];
+    NZQProjectInfoViewController *page = [[NZQProjectInfoViewController alloc]initWithTitle:dic[@"title"]];
+    page.workID = [dic[@"id"] integerValue];
+    [self.navigationController pushViewController:page animated:YES];
 }
 
 

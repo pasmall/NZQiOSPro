@@ -198,7 +198,6 @@ static const CGFloat NZQSpacing = 15;
                 if (weakself.lastCell == nil) {
                     [weakself.selectStrings addObject:zqCell.dataDic];
                 }else if(weakself.lastCell == cell){
-                    [weakself.lastCell cancelSelected];
                     weakself.selectStrings = [NSMutableArray arrayWithObject:zqCell.dataDic];
                 }else{
                     [weakself.lastCell cancelSelected];
