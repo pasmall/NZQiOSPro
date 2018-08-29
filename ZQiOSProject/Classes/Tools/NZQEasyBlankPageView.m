@@ -67,7 +67,7 @@
     self.reloadBlock = block;
     
     if (hasError) {
-        [self.imageView setImage:[UIImage imageNamed:@"common_noNetWork"]];
+        [self.imageView setImage:[UIImage imageNamed:@"bg_default_nonet"]];
         self.tipLabel.text = @"貌似出了点差错";
         self.reloadBtn.hidden = NO;
         self.tipLabel.hidden = NO;
@@ -109,10 +109,10 @@
         [self addSubview:btn];
         _reloadBtn = btn;
         
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"cinct_113"] forState:UIControlStateNormal];
         [btn setTitle:@"点击重新加载" forState:UIControlStateNormal];
+        [btn addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(btn.height * 0.5, btn.height * 0.5)];
         [btn addTarget:self action:@selector(reloadClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _reloadBtn;
@@ -123,6 +123,7 @@
     {
         YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] init];
         imageView.autoPlayAnimatedImage = YES;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:imageView];
         _imageView = imageView;
     }

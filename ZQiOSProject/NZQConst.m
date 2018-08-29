@@ -11,4 +11,4 @@
 // JJT
 NSString *const NZQNZQJJTBaseUrl = @"https://cninct.com/";
 
-
+NSString *const NZQTableViewControllerDeallocNotification = @"NZQTableViewControllerDeallocNotification";

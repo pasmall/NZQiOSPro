@@ -10,3 +10,4 @@
 // JJT
 UIKIT_EXTERN NSString *const NZQJJTBaseUrl;
 
+UIKIT_EXTERN NSString *const NZQTableViewControllerDeallocNotification;

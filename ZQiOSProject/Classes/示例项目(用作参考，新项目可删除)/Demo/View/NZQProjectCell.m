@@ -17,11 +17,13 @@
     _timeLab.backgroundColor =COLORA(0, 0, 0, 0.5);
     _timeLab2.backgroundColor =COLORA(0, 0, 0, 0.5);
     
+    _contentImg.layer.cornerRadius = 8;
+    _contentImg.layer.masksToBounds = YES;
+    
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [_contentImg addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(8, 8)];
     
 }
 
@@ -37,13 +39,24 @@
     
 }
 
+- (void)setDataDic2:(NSDictionary *)dataDic2{
+    _dataDic2 = dataDic2;
+    _titleLab.hidden = YES;
+    _timeLab.hidden = YES;
+    
+    [_contentImg setImageURL:[NSURL URLWithString:dataDic2[@"thumbnail"]]];
+    _timeLab2.text = dataDic2[@"long_time"];
+
+}
+
 - (void)setDataModel:(NZQWorkModel *)dataModel{
     _dataModel = dataModel;
     _titleLab.hidden = YES;
     _timeLab.hidden = YES;
     
     [_contentImg setImageURL:[NSURL URLWithString:dataModel.logourl]];
-    _timeLab2.text = [self returnTimeStrWithSeconds:dataModel.long_time];
+//    _timeLab2.text = [self returnTimeStrWithSeconds:dataModel.long_time];
+    _timeLab2.text  = dataModel.long_time;
 }
 
 

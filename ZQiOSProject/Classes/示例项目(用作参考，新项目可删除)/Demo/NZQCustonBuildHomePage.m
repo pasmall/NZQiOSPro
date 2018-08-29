@@ -110,7 +110,7 @@
     if (isMore) {
         _page ++;
     }else{
-        _page = 15;
+        _page = 1;
     }
 
     [[NZQRequestManager sharedManager] GET:BaseUrlWith(SeeVideoData) parameters:@{@"uid":userID,@"page":@(_page)} completion:^(NZQBaseResponse *response) {

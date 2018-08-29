@@ -62,6 +62,9 @@ typedef NS_OPTIONS(NSInteger, SegmentViewComponent) {
 /** 是否在开始滚动的时候就调整标题栏 默认为NO */
 @property (assign, nonatomic, getter=isAdjustTitleWhenBeginDrag) BOOL adjustTitleWhenBeginDrag;
 
+/*自定义一个渐变色的线*/
+@property (assign,nonatomic)BOOL haveNZQLine;
+
 
 /** 设置附加按钮的背景图片 默认为nil*/
 @property (strong, nonatomic) NSString *extraBtnBackgroundImageName;

@@ -26,6 +26,17 @@
 #define DataBuildInfoDet        @"DataBuildInfoDet"
 #define DataBuildSeeVideoOne    @"DataBuildSeeVideoOne"
 #define DataBuildCollect        @"DataBuildCollect"
+#define DataBuildAddFocus       @"DataBuildAddFocus"
+#define DataSceneryList         @"DataSceneryList"
+#define DataBuildInformation    @"DataBuildInformation"
+#define DataBuildCollectList    @"DataBuildCollectList"
+#define DataBuildUpload         @"DataBuildUpload"
+#define DataBuildMyReser        @"DataBuildMyReser"
+#define DataBuildMyfocus        @"DataBuildMyfocus"
+#define DataBuildFocusList      @"DataBuildFocusList"
+#define DataUploadScenery       @"DataUploadScenery"
+#define DataSceneryDetails      @"DataSceneryDetails"
+#define DataBuildCommList       @"DataBuildCommList"
 
 
 #define BaseUrlWith(key)  [NSString stringWithFormat:@"%@%@",BaseUrl,key]

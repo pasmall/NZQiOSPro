@@ -22,7 +22,6 @@ static const CGFloat NZQSpacing = 15;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self setUI];
 
 }
@@ -85,8 +84,6 @@ static const CGFloat NZQSpacing = 15;
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
     return NO;
 }
-
-
 
 
 #pragma mark - 导航栏样式定义

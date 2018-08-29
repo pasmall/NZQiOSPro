@@ -27,6 +27,9 @@
 #import "UITextView+Addtion.h"
 #import "MBProgressHUD+NZQ.h"
 
+
+
+#import "NZQConst.h"
 //弱引用
 #define NZQWeak(type)  __weak typeof(type) weak##type = type
 #define NZQStrong(type)  __strong typeof(type) strong##type = weak##type

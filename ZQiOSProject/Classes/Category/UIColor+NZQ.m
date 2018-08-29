@@ -81,6 +81,12 @@
 + (UIColor *)zqBlueColor{
     return COLOR(45, 115, 251);
 }
++ (UIColor *)zqShadowColor{
+    return COLORA(45, 115, 251,0.2);
+}
++ (UIColor *)zqGrayShadowColor{
+    return COLORA(230, 230, 230,0.5);
+}
 
 
 @end

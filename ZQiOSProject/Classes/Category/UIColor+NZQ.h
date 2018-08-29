@@ -24,5 +24,7 @@
 + (UIColor *)zqGrayColor;
 + (UIColor *)zqLightGrayColor;
 + (UIColor *)zqBlueColor;
++ (UIColor *)zqShadowColor;
++ (UIColor *)zqGrayShadowColor;
 
 @end

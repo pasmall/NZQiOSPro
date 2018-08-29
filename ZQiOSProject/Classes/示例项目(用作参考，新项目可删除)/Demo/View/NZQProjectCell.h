@@ -22,4 +22,7 @@
 @property (nonatomic,strong)NSDictionary *dataDic;
 @property (nonatomic , strong)NZQWorkModel *dataModel;
 
+//田园梦响 
+@property (nonatomic ,strong)NSDictionary *dataDic2;
+
 @end

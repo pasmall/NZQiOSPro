@@ -277,10 +277,14 @@ static CGFloat const contentSizeXOff = 20.0;
     ZJTitleView *firstLabel = (ZJTitleView *)self.titleViews[0];
     CGFloat coverX = firstLabel.zj_x;
     CGFloat coverW = firstLabel.zj_width;
+    
+    
     CGFloat coverH = self.segmentStyle.coverHeight;
     CGFloat coverY = (self.bounds.size.height - coverH) * 0.5;
     
     if (self.scrollLine) {
+        coverX = firstLabel.zj_width * 0.25;
+        coverW = firstLabel.zj_width * 0.5;
         
         if (self.segmentStyle.isScrollTitle) {
             self.scrollLine.frame = CGRectMake(coverX , self.zj_height - self.segmentStyle.scrollLineHeight, coverW , self.segmentStyle.scrollLineHeight);
@@ -295,6 +299,7 @@ static CGFloat const contentSizeXOff = 20.0;
 
         }
         
+        [self.scrollLine addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(2, 2)];
         
     }
     
@@ -345,6 +350,7 @@ static CGFloat const contentSizeXOff = 20.0;
             if (weakSelf.segmentStyle.isScrollTitle) {
                 weakSelf.scrollLine.zj_x = currentTitleView.zj_x;
                 weakSelf.scrollLine.zj_width = currentTitleView.zj_width;
+                
             } else {
                 if (self.segmentStyle.isAdjustCoverOrLineWidth) {
                     CGFloat scrollLineW = [self.titleWidths[self.currentIndex] floatValue] + wGap;
@@ -352,8 +358,11 @@ static CGFloat const contentSizeXOff = 20.0;
                     weakSelf.scrollLine.zj_x = scrollLineX;
                     weakSelf.scrollLine.zj_width = scrollLineW;
                 } else {
-                    weakSelf.scrollLine.zj_x = currentTitleView.zj_x;
-                    weakSelf.scrollLine.zj_width = currentTitleView.zj_width;
+//                    weakSelf.scrollLine.zj_x = currentTitleView.zj_x;
+//                    weakSelf.scrollLine.zj_width = currentTitleView.zj_width;
+                    
+                    weakSelf.scrollLine.zj_x = currentTitleView.zj_x + currentTitleView.zj_width * 0.25;
+                    weakSelf.scrollLine.zj_width = currentTitleView.zj_width * 0.5;
                 }
                 
             }
@@ -424,8 +433,12 @@ static CGFloat const contentSizeXOff = 20.0;
                 self.scrollLine.zj_x = oldScrollLineX + xDistance * progress;
                 self.scrollLine.zj_width = oldScrollLineW + wDistance * progress;
             } else {
-                self.scrollLine.zj_x = oldTitleView.zj_x + xDistance * progress;
-                self.scrollLine.zj_width = oldTitleView.zj_width + wDistance * progress;
+//                self.scrollLine.zj_x = oldTitleView.zj_x + xDistance * progress;
+//                self.scrollLine.zj_width = oldTitleView.zj_width + wDistance * progress;
+                
+                self.scrollLine.zj_x = oldTitleView.zj_x + xDistance * progress + 0.25 * oldTitleView.zj_width;
+//                self.scrollLine.zj_width = oldTitleView.zj_width + wDistance * progress;
+                
             }
         }
 
@@ -588,6 +601,15 @@ static CGFloat const contentSizeXOff = 20.0;
     if (!_scrollLine) {
         UIView *lineView = [[UIView alloc] init];
         lineView.backgroundColor = self.segmentStyle.scrollLineColor;
+        
+        if (self.segmentStyle.haveNZQLine) {
+            UIImageView *lineImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cinct_171"]];
+            lineImg.contentMode = UIViewContentModeScaleAspectFill;
+            [lineView addSubview:lineImg];
+            [lineImg mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(lineView).insets(UIEdgeInsetsMake(0, 10, 0, 10));
+            }];
+        }
 
         _scrollLine = lineView;
         

@@ -11,7 +11,6 @@
 #import "NZQUpLoadImageCell.h"
 #import "NZQVerticalFlowLayout.h"
 #import <ZFPlayer.h>
-
 #import <TZImagePickerController.h>
 
 #import "NZQSelectTypeViewController.h"
@@ -318,8 +317,8 @@
     
     [MBProgressHUD showMessage:@"上传中" ToView:self.view];
     
-    [_upParam setObject:_textView.text forKey:@"description"];
-    [_upParam setObject:_titleTF.text forKey:@"title"];
+    [self.upParam setObject:_textView.text forKey:@"description"];
+    [self.upParam setObject:_titleTF.text forKey:@"title"];
     
     @weakify(self);
     [[NZQRequestManager sharedManager] upload:BaseUrlWith(BuilduploadVideo) parameters:nil formDataBlock:^NSDictionary<NSData *,NZQDataName *> *(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *,NZQDataName *> *needFillDataDict) {

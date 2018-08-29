@@ -14,7 +14,7 @@
     self.layer.shadowOffset = CGSizeMake(0, 0);
     self.layer.shadowColor = color.CGColor;
     self.layer.shadowRadius = 4;
-    self.layer.shadowOpacity = 0.4;
+    self.layer.shadowOpacity = 1;
 }
 
 
@@ -42,6 +42,27 @@
     [shape setPath:rounded.CGPath];
     
     self.layer.mask = shape;
+}
+
+- (void)addLineWithLinePlace:(NZQLinePlace)place{
+    UIView *line = [[UIView alloc]init];
+    line.backgroundColor = [UIColor lightGrayColor];
+    [self addSubview:line];
+    
+    switch (place) {
+        case NZQLinePlaceDown:{
+            [line mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(0.5);
+                make.left.right.offset(0);
+                make.bottom.offset(-0.5);
+            }];
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

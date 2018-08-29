@@ -12,9 +12,14 @@
 #import <ZFPlayer.h>
 #import "NZQHorizontalFlowLayout.h"
 #import "NZQAutoRefreshFooter.h"
+#import "NZQSubmitInfoViewController.h"
+#import "NZQCommentViewController.h"
 
 #import "NZQWorkModel.h"
 #import "NZQProjectCell.h"
+
+#import "NZQBottomViewPresentationController.h"
+#import "NZQMyCommentListPage.h"
 
 @interface NZQCardInfoViewController ()<SDCycleScrollViewDelegate,WKNavigationDelegate,NZQHorizontalFlowLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
@@ -41,7 +46,7 @@
 @property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *collectDataArray;
 @property (nonatomic,assign)NSInteger colPage;
-@property (nonatomic,strong)UIButton *bottomBtn;
+@property (nonatomic,strong)UIView *downView;
 @property (nonatomic,strong)ZFPlayerView *playerView;
 
 @end
@@ -50,6 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
     
     _colPage = 1;
     [self setUI];
@@ -236,8 +242,7 @@
     [_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     
     _bottomView  = [[UIView alloc]init];
-    _bottomView.backgroundColor = [UIColor whiteColor];
-//    _bottomView.hidden = YES;
+    _bottomView.backgroundColor = [UIColor bgViewColor];
     [_contentView addSubview:_bottomView];
 
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -248,12 +253,12 @@
     
     
     UIView *lineView = [[UIView alloc]init];
-    lineView.backgroundColor = [UIColor bgViewColor];
+    lineView.backgroundColor = [UIColor whiteColor];
     [_bottomView addSubview:lineView];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(10);
-        make.top.mas_equalTo(10);
+        make.height.mas_equalTo(20);
+        make.top.mas_equalTo(0);
     }];
     
     UILabel *designLab = [[UILabel alloc]init];
@@ -270,7 +275,7 @@
     NZQHorizontalFlowLayout *layout = [[NZQHorizontalFlowLayout alloc] initWithDelegate:self];
 
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 120) collectionViewLayout:layout];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor bgViewColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.contentInset = UIEdgeInsetsZero;
@@ -288,20 +293,51 @@
     }];
     [self loadCollectionData];
     
-    _bottomBtn = [[UIButton alloc]init];
-    [_bottomBtn setTitle:@"定制设计" forState:UIControlStateNormal];
-    [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"cinct_113"] forState:UIControlStateNormal];
-    _bottomBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [_contentView addSubview:_bottomBtn];
     
-    [_bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    _downView = [[UIView alloc]init];
+    _downView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_downView];
+    [_downView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.bottom.mas_equalTo(0);
         make.height.mas_equalTo(40);
     }];
     
-    _contentHeight.constant = (self.webView.bottom + 180 + 20 + 40)>kScreenHeight?(self.webView.bottom + 180 + 20 + 40):kScreenHeight;
+    UILabel *desLab = [[UILabel alloc]init];
+    desLab.font = [UIFont systemFontOfSize:15];
+    [_downView addSubview:desLab];
     
+    [desLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.top.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(kScreenWidth *0.6);
+    }];
+    
+    
+    
+    UIButton *desBtn = [[UIButton alloc]init];
+    [desBtn setTitle:@"定制设计" forState:UIControlStateNormal];
+    [desBtn setBackgroundImage:[UIImage imageNamed:@"cinct_113"] forState:UIControlStateNormal];
+    desBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [_downView addSubview:desBtn];
+    
+    [desBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(0);
+        make.top.bottom.mas_equalTo(0);
+        make.left.mas_equalTo(desLab.mas_right);
+    }];
+    
+    
+    [desBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        [weak_self.navigationController  pushViewController:[[NZQSubmitInfoViewController alloc] initWithTitle:@"申请预约"] animated:YES];
+    }];
+
+    
+//    CGFloat safeAre = kScreenHeight - self.nzq_navgationBar.height + 44;
+    
+//    _contentHeight.constant = (self.webView.bottom + 180 + 20 + 40)>_scrollView.height?(self.webView.bottom + 180 + 20 + 40):_scrollView.height;
+    _contentHeight.constant = self.webView.bottom + 180 + 20 + 40;
 }
 
 #pragma mark - action
@@ -313,7 +349,6 @@
         
         NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"artId":weak_self.dataDic[@"id"]};
         [[NZQRequestManager sharedManager] POST:BaseUrlWith(DataBuildCollect) parameters:dic completion:^(NZQBaseResponse *response) {
-            [weak_self dismissLoading];
             if (response.error) {
                 //错误提示
                 return ;
@@ -329,9 +364,18 @@
         
     }];
     
+    
     //评论
     [_comBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+//        NZQCommentViewController *page = [[NZQCommentViewController  alloc]initWithTitle:@""];
+//        [weak_self.navigationController pushViewController:page animated:YES];
         
+        NZQMyCommentListPage *page = [[NZQMyCommentListPage alloc]init];
+        page.zqId = [weak_self.dataDic[@"id"] integerValue];
+        NZQBottomViewPresentationController *presentationController NS_VALID_UNTIL_END_OF_SCOPE;
+        presentationController = [[NZQBottomViewPresentationController alloc] initWithPresentedViewController:page presentingViewController:self];
+        page.transitioningDelegate = presentationController;
+        [self presentViewController:page animated:YES completion:NULL];
     }];
     
     //分享
@@ -347,6 +391,21 @@
     
     //关注作者
     [_focusBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        
+        NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"focus_uid":weak_self.dataDic[@"uid"]};
+        [[NZQRequestManager sharedManager] POST:BaseUrlWith(DataBuildAddFocus) parameters:dic completion:^(NZQBaseResponse *response) {
+            if (response.error) {
+                //错误提示
+                return ;
+            }
+            
+            if (![response.responseObject[@"state"] boolValue]) {
+                //发生错误
+                return ;
+            }else{
+                weak_self.focusBtn.selected = !weak_self.focusBtn.selected;
+            }
+        }];
         
     }];
     
@@ -436,8 +495,9 @@
         make.height.mas_equalTo(newHeight);
     }];
     
-    _contentHeight.constant = (self.webView.bottom + 180 + 20 + 40 )>kScreenHeight?(self.webView.bottom + 180 + 20 + 40 ):kScreenHeight;
-
+//    _contentHeight.constant = (self.webView.bottom + 180 + 20 + 40)>_scrollView.height?(self.webView.bottom + 180 + 20 + 40):_scrollView.height;
+    
+    _contentHeight.constant = self.webView.bottom + 180 + 20 + 40;
 }
 
 #pragma mark - SDCycleScrollViewDelegate
