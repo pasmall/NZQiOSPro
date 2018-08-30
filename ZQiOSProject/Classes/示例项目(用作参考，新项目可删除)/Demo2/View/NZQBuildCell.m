@@ -24,7 +24,6 @@
     _videoImgView.width = kScreenWidth - 30;
     _videoImgView.height = 180;
     _videoImgView.tag = 111;
-    [_videoImgView addRoundedCorners:UIRectCornerAllCorners WithRect:CGRectMake(0, 0, kScreenWidth - 30, _videoImgView.height) WithCornerRadii:CGSizeMake(10, 10)];
     _videoImgView.userInteractionEnabled = YES;
     
     _proLab = [[UILabel alloc]init];
@@ -114,6 +113,7 @@
         make.bottom.mas_equalTo(-25);
     }];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    [_videoImgView addRoundedCorners:UIRectCornerAllCorners WithRect:CGRectMake(0, 0, kScreenWidth - 30, _videoImgView.height) WithCornerRadii:CGSizeMake(10, 10)];
     
     [_colBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
         if (weak_self.tapColBtn) {
