@@ -77,7 +77,7 @@
                                         <constraint firstAttribute="width" constant="44" id="i06-n2-Okr"/>
                                         <constraint firstAttribute="height" constant="32" id="lhr-7A-cZw"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="12" image="icon_comment">
                                         <color key="titleColor" red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
@@ -88,12 +88,12 @@
                                         <constraint firstAttribute="width" constant="44" id="O7E-dz-5dc"/>
                                         <constraint firstAttribute="height" constant="32" id="hVO-nC-JFE"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="12" image="icon_collect_normal">
                                         <color key="titleColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="selected" image="icon_collect_selected">
-                                        <color key="titleColor" red="0.93725490196078431" green="0.34901960784313724" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" red="0.93725490199999995" green="0.80000000000000004" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mgx-G6-syY">
@@ -204,8 +204,8 @@
     </objects>
     <resources>
         <image name="cinct_113" width="177" height="126"/>
-        <image name="icon_collect_normal" width="17" height="15"/>
-        <image name="icon_collect_selected" width="17" height="15"/>
+        <image name="icon_collect_normal" width="16" height="14"/>
+        <image name="icon_collect_selected" width="16" height="14"/>
         <image name="icon_comment" width="17" height="15"/>
         <image name="icon_detail_focuse" width="16" height="15"/>
         <image name="icon_detail_focuseok" width="17" height="11"/>

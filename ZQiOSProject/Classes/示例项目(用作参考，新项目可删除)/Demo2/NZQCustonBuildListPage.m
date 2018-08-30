@@ -11,6 +11,7 @@
 #import <ZFPlayerView.h>
 #import "NZQCardInfoViewController.h"
 #import "NZQTypeListViewController.h"
+#import "NZQOtherCenterViewController.h"
 
 @interface NZQCustonBuildListPage ()
 
@@ -114,13 +115,40 @@
     
     //个人中心
     cell.gotoUserCenter = ^(NZQBuildCell *cell) {
-        
+        NZQOtherCenterViewController *page = [[NZQOtherCenterViewController alloc]initWithTitle:cell.dataDic[@"nickname"]];
+        page.art_uid = [cell.dataDic[@"uid"] integerValue];
+        [weak_self.navigationController pushViewController:page animated:YES];
     };
     
     //类型筛选
     cell.gotoTypePage = ^(NZQBuildCell *cell) {
         NZQTypeListViewController *page = [[NZQTypeListViewController alloc]initWithTitle:@"建筑定制"];
         [weak_self.navigationController  pushViewController:page animated:YES];
+    };
+    
+    //收藏
+    cell.tapColBtn = ^(NZQBuildCell *cell) {
+        NSString *url;
+        if (cell.colBtn.selected) {
+            url = BaseUrlWith(DataBuildCancelPraise);
+        }else{
+            url = BaseUrlWith(DataBuildPraise);
+        }
+        
+        NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"artId":cell.dataDic[@"id"]};
+        [[NZQRequestManager sharedManager] POST:url parameters:dic completion:^(NZQBaseResponse *response) {
+            if (response.error) {
+                //错误提示
+                return ;
+            }
+            
+            if (![response.responseObject[@"state"] boolValue]) {
+                //发生错误
+                return ;
+            }else{
+                cell.colBtn.selected = !cell.colBtn.selected;
+            }
+        }];
     };
     
     return cell;

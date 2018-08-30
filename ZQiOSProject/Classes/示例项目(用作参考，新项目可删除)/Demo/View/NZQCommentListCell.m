@@ -17,8 +17,12 @@
 - (void)setDataDic:(NSDictionary *)dataDic{
     _dataDic = dataDic;
     [_icon setImageURL:[NSURL URLWithString:dataDic[@"headlogourl"]]];
+    [_icon addRoundedCorners:UIRectCornerAllCorners];
+    
+    
     _nameLab.text = dataDic[@"nickname"];
     _contentLab.text = dataDic[@"content"];
+    _timeLab.text = dataDic[@"add"];
     
     NSArray *replyArray = dataDic[@"commentReplyEntities"];
     NSMutableAttributedString *allStr = [[NSMutableAttributedString alloc]init];
@@ -36,12 +40,13 @@
     CGRect  replyBounds = [allStr boundingRectWithSize:CGSizeMake(kScreenWidth - 86, CGFLOAT_MAX) options:options context:nil];
     
     if (allStr.length > 0) {
-        _replyHeight.constant = replyBounds.size.height + 20;
+        _replyHeight.constant = replyBounds.size.height;
     }else{
         _replyHeight.constant = 0;
     }
     
-    
+    _replyBg.layer.cornerRadius = 5;
+    _replyBg.layer.masksToBounds = YES;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     

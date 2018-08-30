@@ -114,7 +114,7 @@
  */
 + (MBProgressHUD *)showProgressToView:(UIView *)view Text:(NSString *)text;
 
-
++ (void)showCustomGifIcon:(NSString *)iconName ToView:(UIView *)view;
 /**
  *  隐藏ProgressView
  *

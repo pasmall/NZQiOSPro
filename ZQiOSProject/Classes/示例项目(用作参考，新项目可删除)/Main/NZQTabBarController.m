@@ -35,37 +35,35 @@
 
 - (void)addChildViewControllers
 {
-    NZQNavigationController *main = [[NZQNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-    
-    NZQNavigationController *base = [[NZQNavigationController alloc] initWithRootViewController:[[BasicKnowViewController alloc] init]];
+//    NZQNavigationController *main = [[NZQNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+//
+//    NZQNavigationController *base = [[NZQNavigationController alloc] initWithRootViewController:[[BasicKnowViewController alloc] init]];
     
     NZQNavigationController *demo = [[NZQNavigationController alloc] initWithRootViewController:[[DemoViewController alloc] init]];
     
-     self.viewControllers = @[main, base, demo];
+     self.viewControllers = @[demo];
 }
 
 - (void)addTabarItems
 {
     
-    NSDictionary *firstTabBarItemsAttributes = @{
-                                                 @"TabBarItemTitle" : @"功能",
-                                                 @"TabBarItemImage" : @"cinct_20",
-                                                 @"TabBarItemSelectedImage" : @"cinct_19",
-                                                 };
-    
-    NSDictionary *secondTabBarItemsAttributes = @{
-                                                  @"TabBarItemTitle" : @"基础",
-                                                  @"TabBarItemImage" : @"cinct_22",
-                                                  @"TabBarItemSelectedImage" : @"cinct_21",
-                                                  };
+//    NSDictionary *firstTabBarItemsAttributes = @{
+//                                                 @"TabBarItemTitle" : @"功能",
+//                                                 @"TabBarItemImage" : @"cinct_20",
+//                                                 @"TabBarItemSelectedImage" : @"cinct_19",
+//                                                 };
+//
+//    NSDictionary *secondTabBarItemsAttributes = @{
+//                                                  @"TabBarItemTitle" : @"基础",
+//                                                  @"TabBarItemImage" : @"cinct_22",
+//                                                  @"TabBarItemSelectedImage" : @"cinct_21",
+//                                                  };
     NSDictionary *thirdTabBarItemsAttributes = @{
                                                  @"TabBarItemTitle" : @"示例",
                                                  @"TabBarItemImage" : @"cinct_24",
                                                  @"TabBarItemSelectedImage" : @"cinct_23",
                                                  };
     NSArray<NSDictionary *>  *tabBarItemsAttributes = @[
-                                                        firstTabBarItemsAttributes,
-                                                        secondTabBarItemsAttributes,
                                                         thirdTabBarItemsAttributes
                                                         ];
     

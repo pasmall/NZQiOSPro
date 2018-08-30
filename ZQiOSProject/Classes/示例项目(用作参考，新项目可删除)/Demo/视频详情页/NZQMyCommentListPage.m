@@ -16,6 +16,9 @@
 @property (nonatomic,strong)UIView *bottomView;
 @property (nonatomic,strong)UITextField *inputTextView;
 
+//回复评论，接口需要的参数。
+@property (nonatomic,strong)NSMutableDictionary *mainDic;
+
 @end
 
 @implementation NZQMyCommentListPage
@@ -75,6 +78,12 @@
     [sendBtn setImage:[UIImage imageNamed:@"btn_comments"] forState:UIControlStateNormal];
     [_bottomView addSubview:sendBtn];
     
+    [sendBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        [weak_self userTapSendBtn];
+    }];
+    
+    
+    
     UIEdgeInsets contentInset = self.tableView.contentInset;
     contentInset.top += header.height;
     contentInset.bottom += _bottomView.height;
@@ -119,8 +128,12 @@
             }];
             return ;
         }
+        
+        NSDictionary *dataDic = response.responseObject[@"ext"][@"data"];
+        [weakself.mainDic setValue:dataDic[@"uid"] forKey:@"replyuid"];
+        weakself.inputTextView.placeholder = @"请留下您的足迹";
 
-        NSArray *array = response.responseObject[@"ext"][@"data"][@"list"];
+        NSArray *array = dataDic[@"list"];
         if (isMore) {
             
             [weakself.dataArray addObjectsFromArray:array];
@@ -144,6 +157,39 @@
 
         [weakself.tableView reloadData];
     }];
+    
+}
+
+#pragma mark - 事件
+- (void)userTapSendBtn{
+    
+    if (_inputTextView.text.length == 0) {
+        [MBProgressHUD showInfo:@"请输入评论内容" ToView:self.view];
+        return;
+    }
+    
+    [_mainDic setValue:_inputTextView.text forKey:@"content"];
+    
+    
+    [self showLoading];
+    @weakify(self);
+    [[NZQRequestManager sharedManager] POST:BaseUrlWith(DataBuildComm) parameters:_mainDic completion:^(NZQBaseResponse *response) {
+        [weak_self dismissLoading];
+        if (response.error) {
+            //错误提示
+            return ;
+        }
+        
+        if (![response.responseObject[@"state"] boolValue]) {
+            //发生错误
+            return ;
+        }else{
+            //成功
+             weak_self.inputTextView.text = @"";
+            [weak_self loadMore:NO];
+        }
+    }];
+    
     
 }
 
@@ -182,7 +228,7 @@
     CGRect replyBounds = [allStr boundingRectWithSize:CGSizeMake(self.view.width - 86, CGFLOAT_MAX) options:options context:nil];
     
     if (allStr.length > 0) {
-        replyBounds.size = CGSizeMake(replyBounds.size.width, replyBounds.size.height + 20);
+        replyBounds.size = CGSizeMake(replyBounds.size.width, replyBounds.size.height+20);
     }else{
         replyBounds.size = CGSizeMake(replyBounds.size.width, 0);
     }
@@ -193,6 +239,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dataDic = self.dataArray[indexPath.row];
+    self.inputTextView.placeholder = [NSString stringWithFormat:@"回复：%@",dataDic[@"nickname"]];
+    self.inputTextView.text = @"";
+    [_mainDic setObject:dataDic[@"id"] forKey:@"reply_id"];
+    [_mainDic setObject:dataDic[@"id"] forKey:@"relationid"];
+    [_mainDic setObject:dataDic[@"uid"] forKey:@"replyuid"];
     
 }
 
@@ -204,4 +256,18 @@
     }
     return _dataArray;
 }
+
+- (NSMutableDictionary *)mainDic{
+    if (!_mainDic) {
+        _mainDic = [NSMutableDictionary dictionary];
+        [_mainDic setValue:userID forKey:@"uid"];
+        [_mainDic setValue:keyID forKey:@"keyid"];
+        [_mainDic setValue:@(0) forKey:@"reply_id"];
+        [_mainDic setValue:@(_zqId) forKey:@"relation_id"];
+        [_mainDic setValue:@(0) forKey:@"relationid"];
+
+    }
+    return _mainDic;
+}
+
 @end

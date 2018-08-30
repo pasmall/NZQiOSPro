@@ -107,8 +107,6 @@
         make.top.mas_equalTo(weak_self.titleLab3.mas_bottom).offset(10);
     }];
     
-    
-    
     _videoHeight.constant = (kScreenWidth - 30) * 9 / 16;
     [playImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(40);
@@ -116,6 +114,12 @@
         make.bottom.mas_equalTo(-25);
     }];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [_colBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        if (weak_self.tapColBtn) {
+            weak_self.tapColBtn(weak_self);
+        }
+    }];
     
 }
 
@@ -194,11 +198,13 @@
             [_videoImgView setImageURL:[NSURL URLWithString:dataDic[@"logourl"]]];
             _priceLab.text = [NSString stringWithFormat:@"指导价格：%@",dataDic[@"price"]];
             
-            if ([dataDic[@"isCollect"] boolValue]) {
-                [_colBtn setTitle:[NSString stringWithFormat:@"% ld",[dataDic[@"collectCount"] integerValue]] forState:UIControlStateSelected];
+            if ([dataDic[@"isPraise"] boolValue]) {
+                [_colBtn setTitle:[NSString stringWithFormat:@"% ld",[dataDic[@"praiseCount"] integerValue]] forState:UIControlStateSelected];
+                [_colBtn setTitle:[NSString stringWithFormat:@"% ld",[dataDic[@"praiseCount"] integerValue]-1] forState:UIControlStateNormal];
                 _colBtn.selected = YES;
             }else{
-                [_colBtn setTitle:[NSString stringWithFormat:@"% ld",[dataDic[@"collectCount"] integerValue]] forState:UIControlStateNormal];
+                [_colBtn setTitle:[NSString stringWithFormat:@"% ld",[dataDic[@"praiseCount"] integerValue]] forState:UIControlStateNormal];
+                [_colBtn setTitle:[NSString stringWithFormat:@"% ld",[dataDic[@"praiseCount"] integerValue]+1] forState:UIControlStateSelected];
                 _colBtn.selected = NO;
             }
             

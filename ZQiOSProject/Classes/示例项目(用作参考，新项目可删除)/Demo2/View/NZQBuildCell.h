@@ -50,6 +50,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) void(^startPlayVideo)(NZQBuildCell *cell);
 @property (nonatomic, copy) void(^gotoUserCenter)(NZQBuildCell *cell);
 @property (nonatomic, copy) void(^gotoTypePage)(NZQBuildCell *cell);
-
+@property (nonatomic, copy) void(^tapColBtn)(NZQBuildCell *cell);
 
 @end

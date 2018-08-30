@@ -13,12 +13,12 @@
 @end
 
 @implementation NZQPageViewController
-extern NSString *const NZQParentTableViewDidLeaveFromTopNotification;
+//extern NSString *const NZQParentTableViewDidLeaveFromTopNotification;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     /// 利用通知可以同时修改所有的子控制器的scrollView的contentOffset为CGPointZero
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leaveFromTop) name:NZQParentTableViewDidLeaveFromTopNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(leaveFromTop) name:NZQParentTableViewDidLeaveFromTopNotification object:nil];
 }
 
 

@@ -37,6 +37,14 @@
 #define DataUploadScenery       @"DataUploadScenery"
 #define DataSceneryDetails      @"DataSceneryDetails"
 #define DataBuildCommList       @"DataBuildCommList"
+#define DataBuildComm           @"DataBuildComm"
+#define DataBuildAuth           @"DataBuildAuth"
+#define DataBuildCancelFocus    @"DataBuildCancelFocus"
+#define DataBuildAuthPrics      @"DataBuildAuthPrics"
+#define DataBuildPraise         @"DataBuildPraise"
+#define DataBuildCancelPraise   @"DataBuildCancelPraise"
+#define DataBuildCancelCollect  @"DataBuildCancelCollect"
+
 
 
 #define BaseUrlWith(key)  [NSString stringWithFormat:@"%@%@",BaseUrl,key]

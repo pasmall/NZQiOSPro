@@ -39,16 +39,16 @@
     //headerView
     UIImageView *headerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"navBackImage"]];
     [self.view addSubview:headerView];
-    headerView.frame = CGRectMake(0, self.nzq_navgationBar.bottom, self.view.width, 10);
+    headerView.frame = CGRectMake(0, self.nzq_navgationBar.bottom, self.view.width, 20);
     
     
     UIView *whiteView = [[UIView alloc]init];
     whiteView.backgroundColor = [UIColor whiteColor];
     [headerView addSubview:whiteView];
     whiteView.frame = headerView.bounds;
-    [whiteView addRoundedCorners:UIRectCornerTopLeft|UIRectCornerTopRight WithCornerRadii:CGSizeMake(10, 10)];
+    [whiteView addRoundedCorners:UIRectCornerTopLeft|UIRectCornerTopRight WithCornerRadii:CGSizeMake(headerView.width, headerView.width)];
     
-    ZJContentView *content = [[ZJContentView alloc] initWithFrame:CGRectMake(0.0, self.nzq_navgationBar.bottom + 10, self.view.bounds.size.width, self.view.bounds.size.height - self.nzq_navgationBar.bottom - 10) segmentView:self.segmentView parentViewController:self delegate:self];
+    ZJContentView *content = [[ZJContentView alloc] initWithFrame:CGRectMake(0.0, self.nzq_navgationBar.bottom + headerView.height, self.view.bounds.size.width, self.view.bounds.size.height - self.nzq_navgationBar.bottom - headerView.height) segmentView:self.segmentView parentViewController:self delegate:self];
     self.contentView = content;
     content.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.contentView];

@@ -7,6 +7,7 @@
 //
 
 #import "MBProgressHUD+NZQ.h"
+#import <YYAnimatedImageView.h>
 
 @implementation MBProgressHUD (NZQ)
 #pragma mark 显示错误信息
@@ -130,6 +131,22 @@
     
     // 3秒之后再消失
     [hud hideAnimated:YES afterDelay:1];
+}
+
++ (void)showCustomGifIcon:(NSString *)iconName ToView:(UIView *)view{
+    
+    if (view == nil) view = (UIView*)[UIApplication sharedApplication].delegate.window;
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    YYAnimatedImageView *gif = [[YYAnimatedImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
+    gif.autoPlayAnimatedImage = YES;
+    gif.frame = CGRectMake(0, 0, 64, 64);
+    
+    hud.customView = gif;
+
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.removeFromSuperViewOnHide = YES;
+    hud.backgroundView.style = MBProgressHUDBackgroundStyleSolidColor;
 }
 
 + (void)hideHUDForView:(UIView *)view

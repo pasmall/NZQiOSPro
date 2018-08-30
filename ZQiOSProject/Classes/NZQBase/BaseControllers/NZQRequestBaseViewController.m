@@ -29,7 +29,8 @@
 
 #pragma mark - 加载框
 - (void)showLoading{
-    [MBProgressHUD showProgressToView:self.view Text:@"加载中..."];
+    [MBProgressHUD showCustomGifIcon:@"loadingB" ToView:self.view];
+//    [MBProgressHUD showProgressToView:self.view Text:@"加载中..."];
 }
 
 - (void)dismissLoading{

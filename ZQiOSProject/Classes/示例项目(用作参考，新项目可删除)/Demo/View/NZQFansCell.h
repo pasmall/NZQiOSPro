@@ -14,6 +14,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 @property (weak, nonatomic) IBOutlet UIButton *operBtn;
 
+@property (nonatomic,strong)NSDictionary *dataDic;
+
+@property (nonatomic, copy) void(^tapfouceBtn)(NZQFansCell *cell);
+
 + (instancetype)fansCellWithTableView:(UITableView *)tableView;
 
 @end

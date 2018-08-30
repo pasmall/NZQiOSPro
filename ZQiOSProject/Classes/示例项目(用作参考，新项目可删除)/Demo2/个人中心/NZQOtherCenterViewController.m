@@ -1,19 +1,19 @@
 //
-//  NZQBuildUserCenterPage.m
+//  NZQOtherCenterViewController.m
 //  ZQiOSProject
 //
-//  Created by Lyric on 2018/8/22.
+//  Created by Lyric on 2018/8/29.
 //  Copyright © 2018年 Lyric. All rights reserved.
 //
 
-#import "NZQBuildUserCenterPage.h"
+#import "NZQOtherCenterViewController.h"
+
 #import "ZJScrollPageView.h"
-#import "NZQUserHeaderView.h"
+#import "NZQOtherCenterHeader.h"
 #import "NZQAutoRefreshFooter.h"
 
-#import "NZQMyCollectPage.h"
-#import "NZQMyUpVideoListPage.h"
-#import "NZQMyOrderListPage.h"
+#import "NZQOtherFansPage.h"
+#import "NZQOtherVideoListPage.h"
 
 #import "NZQMyEditInfoPage.h"
 #import "NZQMyFansListPage.h"
@@ -21,16 +21,13 @@
 
 
 static CGFloat const segmentViewHeight = 44.0;
-static CGFloat const headViewHeight = 130;
+static CGFloat const headViewHeight = 190;
 
-//NSString *const NZQParentTableViewDidLeaveFromTopNotification = @"NZQParentTableViewDidLeaveFromTopNotification";
-
-
-@interface ZJCustomGestureTableView : UITableView
+@interface ZQCustomGestureTableView : UITableView
 
 @end
 
-@implementation ZJCustomGestureTableView
+@implementation ZQCustomGestureTableView
 
 /// 返回YES同时识别多个手势
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
@@ -38,15 +35,15 @@ static CGFloat const headViewHeight = 130;
 }
 @end
 
-@interface NZQBuildUserCenterPage ()<ZJScrollPageViewDelegate, NZQPageViewControllerDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface NZQOtherCenterViewController ()<ZJScrollPageViewDelegate, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray<NSString *> *titles;
 @property (strong, nonatomic) UIView *containerView;
 @property (strong, nonatomic) ZJScrollSegmentView *segmentView;
 @property (strong, nonatomic) ZJContentView *contentView;
-@property (strong, nonatomic) NZQUserHeaderView *headView;
+@property (strong, nonatomic) NZQOtherCenterHeader *headView;
 @property (strong, nonatomic) UIScrollView *childScrollView;
-@property (strong, nonatomic) ZJCustomGestureTableView *tableView;
+@property (strong, nonatomic) ZQCustomGestureTableView *tableView;
 
 @property (strong, nonatomic)UIImageView *headBgView;
 @property (strong, nonatomic)UIView *sectionView;
@@ -54,14 +51,13 @@ static CGFloat const headViewHeight = 130;
 @property (nonatomic,assign)NSInteger currentVcIndex;
 @property(strong, nonatomic)NSArray<UIViewController<ZJScrollPageViewChildVcDelegate> *> *childVcs;
 
-
 @end
 
-@implementation NZQBuildUserCenterPage
+@implementation NZQOtherCenterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self childVcs];
     [self setUI];
     self.nzq_navgationBar.titleView.hidden = YES;
@@ -74,46 +70,49 @@ static CGFloat const headViewHeight = 130;
 - (void)setUI{
     
     [self.view addSubview:self.tableView];
-    _headView.bgImgView.top = - self.nzq_navgationBar.bottom;
-    _headBgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 125)];
-    [_headBgView setImage:[UIImage imageNamed:@"bg_jzdzpersonal_top"]];
-    _headBgView.backgroundColor = [UIColor whiteColor];
-    
-    UIView *whiteView = [[UIView alloc]initWithFrame:CGRectMake(0, self.nzq_navgationBar.bottom, self.view.width, 125 - self.nzq_navgationBar.bottom)];
-    [_headBgView addSubview:whiteView];
-    [self.view insertSubview:_headBgView belowSubview:_tableView];
     
     
-    //头视图事件
-    @weakify(self);
-    _headView.gotoEditInfo = ^(NZQUserHeaderView *cell) {
-        NZQMyEditInfoPage *page = [[NZQMyEditInfoPage  alloc]initWithTitle:@"编辑简介"];
-        [weak_self.navigationController pushViewController:page animated:YES];
+    UIEdgeInsets contentInset = self.tableView.contentInset;
+    contentInset.top += self.nzq_navgationBar.height;
+    
+    self.tableView.contentInset = contentInset;
+    
+    //关注
+    _headView.tapFouceBtn = ^(NZQOtherCenterHeader *header) {
         
-    };
-    _headView.gotoSeePage = ^(NZQUserHeaderView *cell) {
-
-        NZQMyFansListPage *page = [[NZQMyFansListPage  alloc]initWithTitle:@"我的关注"];
-        page.isFans = NO;
-        [weak_self.navigationController pushViewController:page animated:YES];
-    };
-    _headView.gotoFansPage = ^(NZQUserHeaderView *cell) {
-        NZQMyFansListPage *page = [[NZQMyFansListPage  alloc]initWithTitle:@"我的粉丝"];
-        page.isFans = YES;
-        [weak_self.navigationController pushViewController:page animated:YES];
+        NSString *url;
+        if (header.focusBtn.selected) {
+            url = BaseUrlWith(DataBuildCancelFocus);
+        }else{
+            url = BaseUrlWith(DataBuildAddFocus);
+        }
+        
+        NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"focus_uid":header.dataDic[@"uid"]};
+        [[NZQRequestManager sharedManager] POST:url parameters:dic completion:^(NZQBaseResponse *response) {
+            if (response.error) {
+                //错误提示
+                return ;
+            }
+            
+            if (![response.responseObject[@"state"] boolValue]) {
+                //发生错误
+                return ;
+            }else{
+                header.focusBtn.selected = !header.focusBtn.selected;
+            }
+        }];
     };
     
-
 }
 
 - (void)getData{
-    NSDictionary *para = @{@"uid":userID,
-                           @"keyid":keyID,
+    NSDictionary *para = @{@"art_uid":@(_art_uid),
+                           @"uid":userID,
                            };
     
     @weakify(self);
-    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildInformation) parameters:para completion:^(NZQBaseResponse *response) {
-
+    [[NZQRequestManager sharedManager] GET:BaseUrlWith(DataBuildAuth) parameters:para completion:^(NZQBaseResponse *response) {
+        
         if (response.error) {
             //错误提示
             [weak_self.tableView configBlankPage:NZQEasyBlankPageViewTypeNoData hasData:NO hasError:YES reloadButtonBlock:^(id sender) {
@@ -129,9 +128,9 @@ static CGFloat const headViewHeight = 130;
             }];
             return ;
         }
-
-        [weak_self setUIWithData:response.responseObject[@"ext"][@"list"]];
-
+        
+        [weak_self setUIWithData:response.responseObject[@"ext"][@"data"][0]];
+        
         
     }];
 }
@@ -144,15 +143,11 @@ static CGFloat const headViewHeight = 130;
         
         switch (i) {
             case 0:{
-                subLab.text = [NSString stringWithFormat:@"%ld",[dic[@"collectCount"] integerValue]];
+                subLab.text = [NSString stringWithFormat:@"%ld",[dic[@"videoCount"] integerValue]];
             }
                 break;
             case 1:{
-                subLab.text = [NSString stringWithFormat:@"%ld",[dic[@"artCount"] integerValue]];
-            }
-                break;
-            case 2:{
-                subLab.text = [NSString stringWithFormat:@"%ld",[dic[@"resCount"] integerValue]];
+                subLab.text = [NSString stringWithFormat:@"%ld",[dic[@"countFocus"] integerValue]];
             }
                 break;
                 
@@ -176,12 +171,6 @@ static CGFloat const headViewHeight = 130;
         childVc = self.childViewControllers[index];
     }
     
-    if (index == 1) {
-        self.nzq_navgationBar.rightView.hidden = NO;
-    }else{
-        self.nzq_navgationBar.rightView.hidden = YES;
-    }
-
     _currentVcIndex = index;
     return childVc;
 }
@@ -209,27 +198,22 @@ static CGFloat const headViewHeight = 130;
     }
     CGFloat offsetY = scrollView.contentOffset.y;
     if(offsetY < headViewHeight) {
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NZQParentTableViewDidLeaveFromTopNotification object:nil];
-        
+
         if (offsetY > 0) {
             _headBgView.top = -offsetY;
         }else{
             _headBgView.top = 0;
         }
-        
-        
         _statusBarStyle = UIStatusBarStyleDefault;
         self.nzq_navgationBar.backgroundImage = [UIImage imageWithColor:COLORA(0, 0, 0, 0)];
         self.nzq_navgationBar.titleView.hidden = YES;
-        self.nzq_navgationBar.leftView.tintColor = [UIColor blackColor];
+
         
     }else{
-        
-        
         _statusBarStyle = UIStatusBarStyleLightContent;
         self.nzq_navgationBar.backgroundImage = [UIImage imageNamed:@"navBackImage"];
         self.nzq_navgationBar.titleView.hidden = NO;
-        self.nzq_navgationBar.leftView.tintColor = [UIColor whiteColor];
+
     }
     
     
@@ -297,7 +281,7 @@ static CGFloat const headViewHeight = 130;
         style.animatedContentViewWhenTitleClicked = YES;
         style.haveNZQLine = YES;
         
-        self.titles =  @[@"收藏",@"上传",@"预约"];
+        self.titles =  @[@"视频",@"粉丝"];
         
         @weakify(self);
         ZJScrollSegmentView *segment = [[ZJScrollSegmentView alloc] initWithFrame:CGRectMake(0,44, self.view.bounds.size.width, segmentViewHeight) segmentStyle:style delegate:self titles:self.titles titleDidClick:^(ZJTitleView *titleView, NSInteger index) {
@@ -322,19 +306,19 @@ static CGFloat const headViewHeight = 130;
     return _contentView;
 }
 
-- (NZQUserHeaderView *)headView {
+- (NZQOtherCenterHeader *)headView {
     if (!_headView) {
-        _headView = [[NZQUserHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, headViewHeight)];
+        _headView = [[NZQOtherCenterHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, headViewHeight)];
         _headView.backgroundColor = [UIColor whiteColor];
     }
     
     return _headView;
 }
 
-- (ZJCustomGestureTableView *)tableView {
+- (ZQCustomGestureTableView *)tableView {
     if (!_tableView) {
-        CGRect frame = CGRectMake(0.0f, self.nzq_navgationBar.bottom, self.view.bounds.size.width, self.view.bounds.size.height - self.nzq_navgationBar.bottom);
-        ZJCustomGestureTableView *tableView = [[ZJCustomGestureTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+        CGRect frame = CGRectMake(0.0f, 0, self.view.bounds.size.width, kScreenHeight );
+        ZQCustomGestureTableView *tableView = [[ZQCustomGestureTableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         tableView.tableHeaderView = self.headView;
         tableView.rowHeight = self.contentView.bounds.size.height;
         tableView.delegate = self;
@@ -350,15 +334,14 @@ static CGFloat const headViewHeight = 130;
 
 - (NSArray<UIViewController<ZJScrollPageViewChildVcDelegate> *> *)childVcs{
     if (!_childVcs) {
-        NZQMyCollectPage  *page1 = [[NZQMyCollectPage alloc]initWithTitle:@"收藏"];
-        NZQMyUpVideoListPage  *page2 = [[NZQMyUpVideoListPage alloc]initWithTitle:@"上传"];
-        NZQMyOrderListPage  *page3 = [[NZQMyOrderListPage alloc]initWithTitle:@"预约"];
-        
+        NZQOtherFansPage  *page1 = [[NZQOtherFansPage alloc]initWithTitle:@"视频"];
+        page1.art_id = _art_uid;
+        NZQOtherVideoListPage  *page2 = [[NZQOtherVideoListPage alloc]initWithTitle:@"粉丝"];
+        page2.art_id = _art_uid;
         [self addChildViewController:page1];
         [self addChildViewController:page2];
-        [self addChildViewController:page3];
         
-        _childVcs = @[page1,page2,page3];
+        _childVcs = @[page1,page2];
     }
     
     return _childVcs;
@@ -395,21 +378,20 @@ static CGFloat const headViewHeight = 130;
 - (UIImage *)nzqNavigationBarLeftButtonImage:(UIButton *)leftButton navigationBar:(NZQNavigationBar *)navigationBar{
     
     [leftButton setImage:[[UIImage imageNamed:@"navigationButtonReturn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
-    leftButton.tintColor = [UIColor blackColor];
+    leftButton.tintColor = [UIColor whiteColor];
     return [[UIImage imageNamed:@"navigationButtonReturn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
-- (UIImage *)nzqNavigationBarRightButtonImage:(UIButton *)rightButton navigationBar:(NZQNavigationBar *)navigationBar{
-    return [UIImage imageNamed:@"cinct_162"];
-}
+//- (UIImage *)nzqNavigationBarRightButtonImage:(UIButton *)rightButton navigationBar:(NZQNavigationBar *)navigationBar{
+//    return [UIImage imageNamed:@"cinct_162"];
+//}
 
 - (void)leftButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)rightButtonEvent:(UIButton *)sender navigationBar:(NZQNavigationBar *)navigationBar{
-    NZQMyUpVideoViewController *page = [[NZQMyUpVideoViewController alloc]initWithTitle:@"上传"];
-    [self.navigationController pushViewController:page animated:YES];
+
 }
 
 @end

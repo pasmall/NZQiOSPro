@@ -11,14 +11,25 @@
 @implementation NZQFansCell
 
 - (void)setupFansCellUIOnce{
+    [_icon addRoundedCorners:UIRectCornerAllCorners WithCornerRadii:CGSizeMake(5, 5)];
+    _bgView.backgroundColor = [UIColor whiteColor];
+    _bgView.layer.cornerRadius =10;
+    [_bgView addShadowWithColor:[UIColor zqGrayShadowColor]];
     
-    _bgView.backgroundColor = [UIColor bgViewColor];
+    @weakify(self);
+    [_operBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
+        if (weak_self.tapfouceBtn) {
+            weak_self.tapfouceBtn(weak_self);
+        }
+    }];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setDataDic:(NSDictionary *)dataDic{
+    _dataDic = dataDic;
+    [_icon setImageURL:[NSURL URLWithString:dataDic[@"headLogourl"]]];
+    _operBtn.selected = [dataDic[@"isFocus"] boolValue];
+    _nameLab.text = dataDic[@"nickname"];
+    
 }
 
 + (instancetype)fansCellWithTableView:(UITableView *)tableView{

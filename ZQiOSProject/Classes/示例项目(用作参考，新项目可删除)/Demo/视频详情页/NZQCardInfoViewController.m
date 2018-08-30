@@ -20,6 +20,7 @@
 
 #import "NZQBottomViewPresentationController.h"
 #import "NZQMyCommentListPage.h"
+#import "NZQOtherCenterViewController.h"
 
 @interface NZQCardInfoViewController ()<SDCycleScrollViewDelegate,WKNavigationDelegate,NZQHorizontalFlowLayoutDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 
@@ -131,16 +132,16 @@
     _timeLab.text = dic[@"add_Time"];
     
     if ([dic[@"isCollect"] boolValue]) {
-        [_colBtn setTitle:dic[@"collectCount"] forState:UIControlStateSelected];
-        [_colBtn setTitle:[NSString stringWithFormat:@"%ld",[dic[@"collectCount"] integerValue] - 1] forState:UIControlStateNormal];
+        [_colBtn setTitle:[NSString stringWithFormat:@" %ld",[dic[@"collectCount"] integerValue]] forState:UIControlStateSelected];
+        [_colBtn setTitle:[NSString stringWithFormat:@" %ld",[dic[@"collectCount"] integerValue] - 1] forState:UIControlStateNormal];
         _colBtn.selected = YES;
     }else{
-        [_colBtn setTitle:dic[@"collectCount"] forState:UIControlStateNormal];
-        [_colBtn setTitle:[NSString stringWithFormat:@"%ld",[dic[@"collectCount"] integerValue] + 1] forState:UIControlStateSelected];
+        [_colBtn setTitle:[NSString stringWithFormat:@" %ld",[dic[@"collectCount"] integerValue]]forState:UIControlStateNormal];
+        [_colBtn setTitle:[NSString stringWithFormat:@" %ld",[dic[@"collectCount"] integerValue] + 1] forState:UIControlStateSelected];
         _colBtn.selected = NO;
     }
     
-    [_comBtn setTitle:dic[@"commCount"] forState:UIControlStateNormal];
+    [_comBtn setTitle:[NSString stringWithFormat:@" %ld",[dic[@"commCount"] integerValue]] forState:UIControlStateNormal];
     
     [_icon setImageURL:[NSURL URLWithString:dic[@"headlogourl"]]];
     [_icon addRoundedCorners:UIRectCornerAllCorners];
@@ -153,7 +154,7 @@
     
     _focusBg.backgroundColor = [UIColor whiteColor];
     _focusBg.layer.cornerRadius = 12;
-    [_focusBg addShadowWithColor:[UIColor zqBlueColor]];
+    [_focusBg addShadowWithColor:[UIColor zqShadowColor]];
     _focusBtn.selected = [dic[@"isFocus"] boolValue];
     
     if (NZQIsEmpty(dic[@"info"])) {
@@ -347,8 +348,15 @@
     //收藏
     [_colBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
         
+        NSString *url;
+        if (weak_self.colBtn.selected) {
+            url = BaseUrlWith(DataBuildCollect);
+        }else{
+            url = BaseUrlWith(DataBuildCancelCollect);
+        }
+        
         NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"artId":weak_self.dataDic[@"id"]};
-        [[NZQRequestManager sharedManager] POST:BaseUrlWith(DataBuildCollect) parameters:dic completion:^(NZQBaseResponse *response) {
+        [[NZQRequestManager sharedManager] POST:url parameters:dic completion:^(NZQBaseResponse *response) {
             if (response.error) {
                 //错误提示
                 return ;
@@ -361,7 +369,7 @@
                 weak_self.colBtn.selected = !weak_self.colBtn.selected;
             }
         }];
-        
+
     }];
     
     
@@ -386,14 +394,23 @@
     _icon.userInteractionEnabled = YES;
     //作者个人中心
     [_icon addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
-        
+        NZQOtherCenterViewController *page = [[NZQOtherCenterViewController alloc]initWithTitle:weak_self.dataDic[@"nickname"]];
+        page.art_uid = [weak_self.dataDic[@"uid"] integerValue];
+        [weak_self.navigationController pushViewController:page animated:YES];
     }];
     
     //关注作者
     [_focusBtn addTapGestureRecognizer:^(UITapGestureRecognizer *recognizer, NSString *gestureId) {
         
+        NSString *url;
+        if (weak_self.focusBtn.selected) {
+            url = BaseUrlWith(DataBuildCancelFocus);
+        }else{
+            url = BaseUrlWith(DataBuildAddFocus);
+        }
+
         NSDictionary *dic = @{@"uid":userID,@"keyid":keyID,@"focus_uid":weak_self.dataDic[@"uid"]};
-        [[NZQRequestManager sharedManager] POST:BaseUrlWith(DataBuildAddFocus) parameters:dic completion:^(NZQBaseResponse *response) {
+        [[NZQRequestManager sharedManager] POST:url parameters:dic completion:^(NZQBaseResponse *response) {
             if (response.error) {
                 //错误提示
                 return ;
