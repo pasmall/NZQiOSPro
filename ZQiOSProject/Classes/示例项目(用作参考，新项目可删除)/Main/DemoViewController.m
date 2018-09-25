@@ -12,6 +12,7 @@
 #import "NZQCustonBuildHomePage.h"
 #import "NZQCustonBuildHomePage2.h"
 #import "NZQBuildUserCenterPage.h"
+#import "NZQWebViewController.h"
 
 @interface DemoViewController ()
 
@@ -44,8 +45,11 @@
     NZQWordArrowItem *item4 = [NZQWordArrowItem itemWithTitle:@"我的" subTitle: @""];
     item4.destVc = [NZQBuildUserCenterPage class];
     
+    NZQWordArrowItem *item5 = [NZQWordArrowItem itemWithTitle:@"html" subTitle: @""];
+    item5.destVc = [NZQWebViewController class];
     
-    NZQItemSection *section = [NZQItemSection sectionWithItems:@[item0,item1,item2,item3,item4] andHeaderTitle:@"建筑定制" footerTitle:nil];
+    
+    NZQItemSection *section = [NZQItemSection sectionWithItems:@[item0,item1,item2,item3,item4,item5] andHeaderTitle:@"建筑定制" footerTitle:nil];
     [self.sections addObject:section];
 }
 
